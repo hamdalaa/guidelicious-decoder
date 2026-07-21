@@ -5,13 +5,7 @@ export type Lang = "en" | "ar";
 type Dict = Record<string, { en: string; ar: string }>;
 
 export const dict = {
-  "nav.headphones": { en: "Headphones", ar: "سماعات الرأس" },
-  "nav.iems": { en: "IEMs", ar: "سماعات الأذن" },
-  "nav.dac": { en: "DAC & AMPS", ar: "المضخمات" },
-  "nav.deals": { en: "Deals", ar: "العروض" },
-  "nav.shop": { en: "Shop", ar: "المتجر" },
   "nav.cart": { en: "Cart", ar: "السلة" },
-  "nav.menu": { en: "Menu", ar: "القائمة" },
 
   "hero.eyebrow": { en: "New collection", ar: "المجموعة الجديدة" },
   "hero.brand": { en: "Edio", ar: "إيديو" },
@@ -28,8 +22,6 @@ export const dict = {
   "hero.cta.shop": { en: "Shop headphones", ar: "تسوّق السماعات" },
   "hero.cta.shopNow": { en: "Shop now", ar: "تسوّق الآن" },
   "hero.cta.details": { en: "Details", ar: "التفاصيل" },
-  "hero.teaser.eyebrow": { en: "Curated by Edio", ar: "اختيار إيديو" },
-  "hero.teaser.title": { en: "Essential bundles.", ar: "الحزم الأساسية." },
 
   "footer.tagline": {
     en: "Sound, guided. Curated audio gear with calm, expert advice — no noise, no pressure.",
@@ -43,6 +35,10 @@ export const dict = {
   "footer.returns": { en: "Returns", ar: "الإرجاع" },
   "footer.warranty": { en: "Warranty", ar: "الضمان" },
   "footer.contact": { en: "Contact", ar: "تواصل" },
+  "footer.headphones": { en: "Headphones", ar: "سماعات الرأس" },
+  "footer.iems": { en: "IEMs", ar: "سماعات الأذن" },
+  "footer.dac": { en: "DAC & AMPS", ar: "المضخمات" },
+  "footer.deals": { en: "Deals", ar: "العروض" },
 } satisfies Dict;
 
 export type TKey = keyof typeof dict;
@@ -60,9 +56,11 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>("en");
 
   useEffect(() => {
+    // Keep <html dir> stable at ltr so header controls never mirror.
+    // Content shells (main/footer) opt into RTL via [dir="rtl"] on themselves.
     const el = document.documentElement;
     el.lang = lang;
-    el.dir = lang === "ar" ? "rtl" : "ltr";
+    el.dir = "ltr";
     const main = document.querySelector("main");
     if (main) {
       main.classList.remove("edio-lang-swap");

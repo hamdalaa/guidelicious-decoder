@@ -3,10 +3,10 @@ import { EdioLogo } from "@/components/EdioLogo";
 import { useI18n, type TKey } from "@/lib/i18n";
 
 const SHOP: { key: TKey; href: string }[] = [
-  { key: "nav.headphones", href: "#headphones" },
-  { key: "nav.iems", href: "#iems" },
-  { key: "nav.dac", href: "#dac-amps" },
-  { key: "nav.deals", href: "#deals" },
+  { key: "footer.headphones", href: "#headphones" },
+  { key: "footer.iems", href: "#iems" },
+  { key: "footer.dac", href: "#dac-amps" },
+  { key: "footer.deals", href: "#deals" },
 ];
 
 const SUPPORT: { key: TKey; href: string }[] = [

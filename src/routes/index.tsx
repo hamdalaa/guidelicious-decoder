@@ -2,8 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { HeroCard } from "@/components/hero/HeroCard";
-import { CategoryView } from "@/components/category/CategoryView";
-import { useCategory } from "@/lib/category";
+import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -26,11 +25,13 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const { active } = useCategory();
+  const { dir } = useI18n();
   return (
     <div className="min-h-screen bg-edio-cream">
       <Header />
-      <main>{active ? <CategoryView /> : <HeroCard />}</main>
+      <main dir={dir}>
+        <HeroCard />
+      </main>
       <Footer />
     </div>
   );
