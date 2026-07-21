@@ -1,56 +1,56 @@
-# Edio — Foundation Plan (Locked to Luminous Labs UI)
+## Understood from the uploads
 
-## Locked references (non-negotiable)
-- **UI/UX reference:** `user-uploads://image.png` (Luminous Labs). Every layout, spacing, nav pattern, hero frame, rounded-corner card, type hierarchy, and interaction we build must copy this literally. No personal vision, no "improvements".
-- **Hero image swap:** replace the red Kini wearable hero with `user-uploads://image-2.png` (Edio audio gear on blue podiums). Everything else in the hero frame stays structurally identical to Luminous Labs.
-- **Brand system:** the Edio guidelines site (already analyzed) — Arabic-first RTL, navy/blue/white palette, TT Neoris Pro typography, aurora textures, consultant tone.
-- **Models:** always use the newest/best Lovable models (e.g. `openai/gpt-5.6-sol`, `openai/gpt-5.5`, `openai/gpt-5.4`). Never Gemini 2.5/3 or older. Locked.
+**Edio.zip → Header logo scheme** (Slide 100 = icon on light-lavender field, Slide 101 = list-row lockup):
+- The header brand mark is a **lockup**: rounded-square blue-gradient icon (the "O" mark) placed next to the **"Edio" wordmark**, sitting on a subtle **light-blue pill/bar** background — exactly the row style in Slide 101.
+- Icon: `edio-icon-blue.svg` (blue gradient tile). Wordmark: `edio-wordmark-navy.svg`. Pill background: light-blue (`--edio-sky` @ low opacity, matches the pale strip in Slide 101).
 
-## Layout contract inherited from Luminous Labs
-```text
-┌───────────────────────────────────────────────────────────┐
-│  [logo]      Technology  Company  Commercial  Blog  (Shop)│   ← cream top bar, pill CTA
-│                                              EN⌄   Cart 🛍│
-├───────────────────────────────────────────────────────────┤
-│  ╭─────────────────────────────────────────────────────╮ │
-│  │  BigTitle   subLabel                                │ │
-│  │                                                     │ │   ← rounded hero card
-│  │              [ HERO IMAGE = Edio image-2 ]          │ │
-│  │                                                     │ │
-│  ╰─────────────────────────────────────────────────────╯ │
-└───────────────────────────────────────────────────────────┘
-```
-- Cream page bg, rounded hero container, oversized display headline + small sublabel, pill-shaped primary CTA, minimalist top nav with lang + cart on the right.
-- Direction will flip to RTL for Arabic-first, but the visual composition mirrors the reference.
+**Edio_1.zip + Slide_16_9_-_99 → Featured Products (best-seller) block**:
+- Three product cards, white, generously rounded, arranged in a row on a **light-blue gradient page band** (matches slide bg).
+- **Middle card is the featured/best-seller**: card interior fill is a soft blue radial gradient (Rectangle 141), card itself sits slightly elevated, larger visual weight. Side cards have plain white interiors.
+- **Buy Now button ("اشتر الآن")** — two exact variants, no invention:
+  - **Featured (middle) button** → glossy blue-gradient pill (Rectangle 147), light-cyan Arabic text. Sits attached to the bottom of the featured card.
+  - **Side buttons** → flat light-sky pill (Rectangles 143/145), navy Arabic text.
+- RTL layout throughout. Text is always "اشتر الآن".
 
-## Step 1 — Asset intake (this step's only build work)
-Unpack and register everything so it's ready in memory before any UI work:
-1. **Fonts** — extract TT Neoris Pro Trial family; upload the weights we'll actually use (Regular, Medium, DemiBold, Bold + italics) via `lovable-assets`; wire `@font-face` in `src/styles.css`; expose `--font-display` / `--font-body` tokens.
-2. **Logos** — upload primary wordmark, icon mark, and RTL/LTR lockups (SVG preferred) as Lovable Assets; catalog pointers under `src/assets/logos/`.
-3. **Backgrounds** — upload aurora / gradient textures as assets; catalog under `src/assets/backgrounds/`.
-4. **Icons** — upload the icon set as assets; catalog under `src/assets/icons/`.
-5. **Hero image** — upload `image-2.png` as `src/assets/hero-edio.png.asset.json` for use in Step 2.
-6. **Design tokens** — add Edio palette (navy, blue, white, cream neutrals) + typography tokens to `src/styles.css` as semantic tokens (`--background`, `--foreground`, `--primary`, `--accent`, etc.). No hardcoded colors in components.
-7. **Memory** — write `mem://design/edio-brand.md` (palette, fonts, tone, RTL rule) and `mem://design/ui-reference.md` (Luminous Labs layout is the locked reference) and update `mem://index.md` Core rules.
+The archives contain the pre-rendered Arabic wordmark PNGs and the button pill backgrounds — they're reference/source. For crisp rendering we render the button as HTML: pill background from the PNG (or a matching CSS gradient) + live Arabic text in TT Neoris Pro, so it stays sharp and clickable.
 
-No page rendering yet — index route stays as-is until Step 2.
+## Step 2 — Header logo lockup
 
-## Step 2 — Home hero (next order, after you confirm Step 1)
-Rebuild `src/routes/index.tsx` as a literal port of the Luminous Labs hero:
-- Cream background, top nav (logo left / links center / lang+cart right), pill "Shop" CTA.
-- Rounded hero card containing Edio hero image (`image-2`), oversized display title + small sublabel in TT Neoris.
-- RTL layout, Arabic copy from the Edio brief.
-- Unique `head()` metadata (title, description, og:title, og:description, og:image = hero URL, twitter:card).
+1. Register assets via `lovable-assets` from `/mnt/user-uploads/Edio.zip` extraction:
+   - `edio-icon-blue.svg`, `edio-wordmark-navy.svg`, `edio-wordmark-white.svg`.
+2. Build `src/components/EdioLogo.tsx`:
+   - Props: `variant: "navy" | "white"`, `size?: "sm" | "md"`.
+   - Renders: `<span class="pill">` wrapping `<img icon>` + `<img wordmark>` horizontally, gap ~12px, pill uses `bg-edio-sky/40` with rounded-full padding matching Slide 101 proportions.
+   - Icon fixed height (28px sm / 36px md); wordmark scales to match.
+   - RTL-safe: use logical padding, keep icon-then-wordmark order (Edio uses LTR wordmark inside RTL page — same as Slide 101).
+3. No header component built yet (that's a future page step) — just export the component + add a memory note so any header we build later uses it.
 
-## Step 3+ — Later sections (only when you say so)
-Additional pages/sections will each arrive with their own Luminous Labs-style reference from you; I copy them literally, swap in Edio content/imagery, keep RTL and brand tokens.
+## Step 3 — Featured Products section
 
-## Guardrails I'm locking in
-- Never deviate from an uploaded UI reference.
-- Never invent layout, hero shapes, nav patterns, or components not present in the reference.
-- Only semantic design tokens in components — no `text-white`, `bg-[#...]`, etc.
-- Always latest Lovable models when AI is involved.
-- Arabic-first RTL by default.
+1. Register assets from `Edio_1.zip`:
+   - `product-featured.png` (Rectangle 140 — center headphone), `product-left.png` (Rectangle 144), `product-right.png` (Rectangle 146).
+   - `card-featured-bg.png` (Rectangle 141 — blue radial glow card interior).
+   - `btn-featured-bg.png` (Rectangle 147 — glossy blue pill), `btn-side-bg.png` (Rectangle 143 — flat sky pill).
+   - Note: Rectangle 145 is a duplicate of 143; 146 duplicate variant of 144 — dedupe on upload.
+2. Build reusable pieces in `src/components/products/`:
+   - **`BuyNowButton.tsx`** — Locked to the two variants. Props: `variant: "featured" | "side"`, `href?`, `onClick?`. Renders `<button>` with pill background (`background-image: url(btn-*-bg.png)` sized `100% 100%`), Arabic label "اشتر الآن" in TT Neoris Pro DemiBold, text color: light-sky (`--edio-sky`) for featured, navy (`--edio-navy`) for side. Fixed heights matching source (featured taller/glossier, side flatter). No hover invention beyond a subtle scale/opacity — memory-noted.
+   - **`ProductCard.tsx`** — Props: `image`, `variant: "featured" | "standard"`. White rounded-2xl card, `aspect-square` image slot. Featured variant swaps interior to the blue-glow background (`card-featured-bg.png`) and gets a slightly larger min-height / stronger shadow.
+   - **`FeaturedProducts.tsx`** — Section wrapper. Light-blue gradient band background matching Slide 99, container with `dir="rtl"`, 3-column grid on desktop (`grid-cols-3`, middle card gets `md:-my-6` lift), stacks on mobile. Card order in DOM: side-left, featured-middle, side-right; BuyNowButton renders directly under each card.
+3. **Do not** wire this into the home page yet — user wants Step 2 & 3 as building blocks. Leave `/` untouched with the placeholder.
+4. Update memory:
+   - `mem://design/components-logo` — header logo is always the pill lockup component; never render the wordmark alone in header.
+   - `mem://design/components-buy-now` — Buy Now button has exactly two variants (featured/side), Arabic label locked to "اشتر الآن", pill backgrounds come from provided PNGs.
+   - `mem://reference/edio-assets` — append new product/card/button CDN URLs.
 
-## Confirm to proceed
-Reply "go" and I'll execute **Step 1 only** (asset intake + tokens + memory). Home page stays untouched until you approve Step 2.
+## Technical notes
+
+- Assets go to CDN via `lovable-assets create --file /mnt/user-uploads/... --filename <name>` → pointer JSON at `src/assets/<subdir>/*.asset.json`. Import pointer, use `.url`.
+- Button pill backgrounds render via `background-image` + `background-size: 100% 100%` so the glossy gradient scales to any button width while Arabic text stays live/selectable.
+- All new components use only semantic tokens (`bg-edio-sky`, `text-edio-navy`, etc.) already defined in `src/styles.css`.
+- No route changes, no data layer, no build/config changes.
+
+## Out of scope (explicit)
+
+- Not building the actual header bar, nav, hero, or home page composition in this step.
+- Not inventing hover states, section titles, product names, prices, or additional cards — none were provided.
+- Not touching `src/routes/index.tsx`.
