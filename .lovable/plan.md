@@ -1,56 +1,77 @@
-## Goal
 
-Replace the current TT Neoris Pro setup with the bilingual typography system from the uploaded Lovable Font Package. Arabic is the default (RTL). English is LTR. TT Neoris Pro and Saans are held for later swap-in when licensed.
+## Scope
 
-Nothing new is built visually — this is a foundation change only.
+Only the hero landing on `/`. No product listing, no auth, no backend, no legal pages. Those come later per your roadmap.
 
-## Font mapping (permanent tokens)
+## Language decision (flagging one conflict)
 
-- `--font-en-main: "Switzer", sans-serif;` — placeholder for Saans
-- `--font-ar-main: "IBM Plex Sans Arabic", sans-serif;` — placeholder for TT Neoris Pro
-- `--font-technical: "IBM Plex Mono", monospace;` — SKUs, model numbers, measurements, specs, small technical labels only
+You said "don't add Arabic" for hero copy, and the nav labels you gave are English (Headphones / IEMs / DAC & AMPS / Deals). Memory currently locks Arabic-as-default. I will:
 
-Dominant weight is 500 (Medium). 400 for body. 600 only for stronger Arabic emphasis. No negative letter-spacing on Arabic; English display headings may use -0.01em to -0.03em.
+- Flip the default document to `<html lang="en" dir="ltr">` for now.
+- Keep the AR/EN toggle wired; clicking AR switches to `lang="ar" dir="rtl"` and swaps the font stack via the existing `html[lang]` rules — no layout rewrites needed later.
+- Update memory so Arabic-first is no longer a hard rule; it becomes "bilingual with EN default, AR fully supported."
 
-## Steps
+If you actually want AR as the default and English only as a secondary toggle, say so and I'll flip it.
 
-1. **Upload font files to CDN** via `lovable-assets` from `/mnt/user-uploads/Lovable_Font_Package.zip` (SAFE-TO-UPLOAD only):
-   - Switzer-Variable.woff2, Switzer-VariableItalic.woff2
-   - IBMPlexSansArabic-Regular / Medium / SemiBold .woff2
-   - IBMPlexMono-Regular.ttf
-   - Skip the trial folder (Saans, TT Neoris Pro Preview).
+## Header
 
-2. **Rewrite `@font-face` block in `src/styles.css`**:
-   - Remove all TT Neoris Pro `@font-face` declarations.
-   - Add Switzer variable (weight range 100–900, italic + upright) using CDN URLs.
-   - Add IBM Plex Sans Arabic Regular/Medium/SemiBold.
-   - Add IBM Plex Mono Regular.
-   - All with `font-display: swap`.
+- Left: `<EdioLogo />` pill lockup (already built).
+- Center: nav pill with 4 links — **Headphones · IEMs · DAC & AMPS · Deals**.
+- Right: `EN / AR` toggle (visual only for now, updates `document.documentElement.lang` + `dir`) and a minimal cart icon (non-functional placeholder).
+- Sticky, translucent cream background, rounded pill container, matches Luminous Labs header proportions.
 
-3. **Update `@theme` tokens** in `src/styles.css`:
-   - Replace `--font-sans` / `--font-display` with:
-     - `--font-en-main: "Switzer", system-ui, sans-serif;`
-     - `--font-ar-main: "IBM Plex Sans Arabic", system-ui, sans-serif;`
-     - `--font-technical: "IBM Plex Mono", ui-monospace, monospace;`
-   - Keep `--font-sans` as an alias that resolves per-lang (see step 4).
+## Hero card (the one big Luminous-Labs-style rounded block)
 
-4. **Lang-driven default in `:root` / base layer**:
-   - `html[lang="ar"] { direction: rtl; font-family: var(--font-ar-main); }`
-   - `html[lang="en"] { direction: ltr; font-family: var(--font-en-main); }`
-   - Body inherits. Add utility class `.font-technical` mapped to `--font-technical` for SKUs/specs.
+- Massive `rounded-[2.5rem]` card, cream page background, card interior uses a soft blue gradient consistent with Edio palette (not red like the reference — Edio is navy/blue).
+- Left side (desktop) / top (mobile): short premium English copy. I'll write it with the best model in Edio's calm-guide voice. Draft direction (final in build):
+  - Eyebrow: `Sound, guided.`
+  - Headline (Saans-placeholder Switzer Medium, ~72px desktop / 40px mobile, tight tracking): `Find the sound that fits you.`
+  - Sub (Switzer Regular, muted navy): `Edio helps you choose the right audio gear — no noise, no pressure.`
+  - CTA: solid navy pill `Explore` + ghost pill `How it works`.
+- Right side / bottom: the product-group photo you uploaded (silver/white gear on light-blue cubes) placed inside the card with generous padding, subtle drop shadow, no crop.
+- All numbers/specs (if any tiny label appears) use `--font-technical` (IBM Plex Mono).
 
-5. **Root shell change** (`src/routes/__root.tsx`):
-   - Change `<html lang="en">` → `<html lang="ar" dir="rtl">` (Arabic default per brand rule).
+## Footer (minimal, this step only)
 
-6. **Memory updates**:
-   - Update `mem://design/edio-brand.md`: typography section now Switzer (EN placeholder for Saans) + IBM Plex Sans Arabic (AR placeholder for TT Neoris Pro) + IBM Plex Mono (technical only). Weight 500 dominant. No negative letter-spacing on Arabic.
-   - Update `mem://reference/edio-assets.md`: replace TT Neoris Pro CDN URLs with new font URLs. Note TT Neoris Pro / Saans are pending license upload.
-   - Update `mem://index.md` Core: default lang=ar, font tokens list.
+- Small centered row: Edio wordmark · © 2026 · Telegram (`t.me/edio_iq`) · Instagram (`instagram.com/edio.iq`).
+- Placeholder line: "Legal pages coming soon" — real privacy/returns/terms land in a later step.
 
-7. **Verify**: build must pass; DevTools Network shows the woff2 files loading (not system fallback).
+## Responsiveness (locked as a project rule)
 
-## Out of scope
+- Mobile-first. Design and test at 375px first, then scale up.
+- Hero stacks vertically on mobile; image sits below copy, still inside the rounded card, with reduced padding and radius (`rounded-[1.75rem]`).
+- Nav collapses to a hamburger drawer under `md`.
+- Type scales down via `clamp()` — no fixed pixel headings.
+- Absolutely nothing that reads as "AI slop": no purple gradients, no generic hero blobs, no stock 3D shapes, no lorem-style filler, no default shadcn card look. Every surface uses Edio tokens.
 
-- No new pages, components, or layout edits.
-- Existing components (`EdioLogo`, `BuyNowButton`, `FeaturedProducts`, home placeholder) untouched except by inherited font-family.
-- No swap to Saans/TT Neoris Pro until licensed files arrive — that will be a future one-line CDN URL swap with no layout impact.
+## Memory updates in the same step
+
+- `mem://index.md` Core: change "Arabic-first RTL" → "Bilingual (EN default, AR toggle with RTL). Mobile-first is mandatory. Never AI-slop aesthetics."
+- `mem://design/edio-brand.md`: reflect language default flip + mobile-first + no-AI-slop rule.
+- New `mem://features/nav-and-footer.md`: locks the 4 nav items and the two social URLs so later steps reuse them verbatim.
+
+## Files touched (technical section)
+
+- `src/routes/index.tsx` — replace placeholder with hero page composition.
+- `src/routes/__root.tsx` — flip default `lang`/`dir` to `en`/`ltr`; wire a tiny client-side toggle.
+- `src/components/site/Header.tsx` *(new)* — logo + nav pill + lang toggle.
+- `src/components/site/Footer.tsx` *(new)* — minimal footer.
+- `src/components/hero/HeroCard.tsx` *(new)* — the rounded hero block.
+- `src/components/site/LangToggle.tsx` *(new)* — sets `documentElement.lang`/`dir`.
+- Head metadata on `/`: unique title + description + og:title/description; og:image uses the uploaded product-group CDN URL (leaf route only).
+
+## What I am NOT doing this step
+
+- No product cards on the home page (the featured-products component stays unused until you send catalog data).
+- No AR translations of the hero copy yet (toggle will show EN for both until you send AR strings).
+- No cart, no auth, no checkout, no Swagger wiring.
+- No legal pages, no full footer sitemap.
+
+## What I still need from you eventually (not blocking hero)
+
+- Arabic translations for nav + hero copy (for real AR toggle).
+- Product catalog / Swagger.
+- Final legal copy (or approval to generate standard Shopify-style pages).
+- Confirmation on default language (EN vs AR).
+
+Approve and I'll build the hero exactly to this spec.
