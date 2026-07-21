@@ -110,9 +110,12 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Edio brand tokens */
-  --font-sans: "TT Neoris Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "TT Neoris Pro", system-ui, sans-serif;
+  /* Edio typography tokens — permanent, resolved per html[lang] */
+  --font-en-main: "Switzer", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-ar-main: "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-technical: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: var(--font-ar-main);
+  --font-display: var(--font-ar-main);
   --color-edio-navy: var(--edio-navy);
   --color-edio-blue: var(--edio-blue);
   --color-edio-sky: var(--edio-sky);
