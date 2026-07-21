@@ -2,6 +2,43 @@
 @source "../src";
 @import "tw-animate-css";
 
+/* Edio brand typeface — TT Neoris Pro (Trial) served from Lovable CDN */
+@font-face {
+  font-family: "TT Neoris Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/__l5e/assets-v1/bc34fafd-da64-4b65-97b8-6f9edb750fa8/TTNeorisPro-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "TT Neoris Pro";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/__l5e/assets-v1/92f532fe-460b-4cab-b1d0-0afa04a66867/TTNeorisPro-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "TT Neoris Pro";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/__l5e/assets-v1/6e60da48-4cef-4fba-9e7b-77753ed97310/TTNeorisPro-DemiBold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "TT Neoris Pro";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/__l5e/assets-v1/e40d5a27-f0e1-4456-84f6-dfebeb94204f/TTNeorisPro-Bold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "TT Neoris Pro";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("/__l5e/assets-v1/3ca1788a-9db4-4702-96d3-5cfed4986227/TTNeorisPro-Black.woff2") format("woff2");
+}
+
 @custom-variant dark (&:is(.dark *));
 
 /*
