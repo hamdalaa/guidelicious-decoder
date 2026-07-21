@@ -1,0 +1,78 @@
+export type Lang = "en" | "ar";
+
+export const STRINGS = {
+  en: {
+    "nav.back": "Back",
+    "nav.cart": "Cart",
+    "nav.home": "Edio home",
+    "brand.name": "Edio",
+
+    "hero.eyebrow": "New collection",
+    "hero.title": "Introducing Edio, a new standard in curated audio.",
+    "hero.wordmark": "Edio",
+    "hero.subtitle": "Audio",
+    "hero.desc": "Find the sound that fits you — no noise, no pressure.",
+    "hero.cta.explore": "Explore",
+    "hero.cta.shopHeadphones": "Shop headphones",
+    "hero.cta.shopNow": "Shop now",
+    "hero.cta.details": "Details",
+    "hero.teaser.eyebrow": "Curated by Edio",
+    "hero.teaser.title": "Essential bundles.",
+
+    "footer.tagline":
+      "Sound, guided. Curated audio gear with calm, expert advice — no noise, no pressure.",
+    "footer.shop": "Shop",
+    "footer.support": "Support & Legal",
+    "footer.link.headphones": "Headphones",
+    "footer.link.iems": "IEMs",
+    "footer.link.dacamps": "DAC & AMPS",
+    "footer.link.deals": "Deals",
+    "footer.link.privacy": "Privacy Policy",
+    "footer.link.terms": "Terms of Service",
+    "footer.link.refunds": "Refund Policy",
+    "footer.link.returns": "Returns",
+    "footer.link.warranty": "Warranty",
+    "footer.link.contact": "Contact",
+    "footer.social.telegram": "Edio on Telegram",
+    "footer.social.instagram": "Edio on Instagram",
+    "lang.toggle": "Language",
+  },
+  ar: {
+    "nav.back": "رجوع",
+    "nav.cart": "السلة",
+    "nav.home": "الرئيسية",
+    "brand.name": "إيديو",
+
+    "hero.eyebrow": "المجموعة الجديدة",
+    "hero.title": "إيديو، معيار جديد للصوت المُنتقى.",
+    "hero.wordmark": "إيديو",
+    "hero.subtitle": "أوديو",
+    "hero.desc": "اعثر على الصوت الذي يناسبك — بلا ضجيج ولا ضغط.",
+    "hero.cta.explore": "اكتشف",
+    "hero.cta.shopHeadphones": "تسوّق السماعات",
+    "hero.cta.shopNow": "تسوّق الآن",
+    "hero.cta.details": "التفاصيل",
+    "hero.teaser.eyebrow": "مختارات إيديو",
+    "hero.teaser.title": "الباقات الأساسية.",
+
+    "footer.tagline":
+      "صوت، بإرشاد. معدّات صوتية مُنتقاة بنصيحة هادئة وخبيرة — بلا ضجيج ولا ضغط.",
+    "footer.shop": "تسوّق",
+    "footer.support": "الدعم والقانوني",
+    "footer.link.headphones": "السماعات",
+    "footer.link.iems": "سماعات داخل الأذن",
+    "footer.link.dacamps": "DAC ومكبرات",
+    "footer.link.deals": "العروض",
+    "footer.link.privacy": "سياسة الخصوصية",
+    "footer.link.terms": "شروط الاستخدام",
+    "footer.link.refunds": "سياسة الاسترداد",
+    "footer.link.returns": "الإرجاع",
+    "footer.link.warranty": "الضمان",
+    "footer.link.contact": "تواصل معنا",
+    "footer.social.telegram": "إيديو على تيليجرام",
+    "footer.social.instagram": "إيديو على إنستغرام",
+    "lang.toggle": "اللغة",
+  },
+} as const;
+
+export type StringKey = keyof (typeof STRINGS)["en"];
