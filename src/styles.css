@@ -208,10 +208,27 @@
     border-color: var(--color-border);
   }
 
+  html[lang="ar"] {
+    direction: rtl;
+    font-family: var(--font-ar-main);
+  }
+
+  html[lang="en"] {
+    direction: ltr;
+    font-family: var(--font-en-main);
+    letter-spacing: -0.011em;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: var(--font-sans);
+    font-family: inherit;
+    font-weight: 500;
     -webkit-font-smoothing: antialiased;
   }
+}
+
+@utility font-technical {
+  font-family: var(--font-technical);
+  font-feature-settings: "tnum" 1;
 }
