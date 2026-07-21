@@ -1,50 +1,43 @@
-# Hero + Header + Footer refinement
+# Hero rework + footer cleanup + Geist question
 
-Scope: only the pieces you listed. No new pages, no product data yet.
+## 1. Hero — match the Luminous Labs UI exactly
 
-## 1. Hero section — full-bleed Luminous Labs style
+### Desktop (image ref 2)
+- One large rounded hero card that **is** the product image (edge-to-edge, no side panel).
+- Copy overlays on top of the image on the left:
+  - Small product label row: **"Edio"** in bold + **"Audio"** in muted grey, aligned like "Kini Wearable".
+  - No headline in a separate white column — headline sits on the image itself in the top-left area.
+- Product photo bleeds to all edges of the card; card has same big rounded corners as reference.
+- Right side of card is pure image (no white content column).
 
-- Remove the "Sound, guided." pill entirely.
-- Turn the hero into one full-width rounded card (Luminous Labs composition): copy on the left, product photo on the right occupying the full right half of the card — image fills the panel edge-to-edge, no white gap, no drop-shadow float.
-- Rebalance grid so the image reads as an integral panel (right column ~55% on desktop, background tinted panel behind it, image fitted with `object-cover` + subtle inner mask, not a clipped centered PNG).
-- Keep headline "Find the sound that fits you." + subcopy.
-- Replace the "How it works" secondary CTA with **"Shop headphones"** (useful, on-store). Primary CTA stays "Explore" → will point at the catalog once it exists.
-- Mobile: image stacks under copy at full card width with matching rounded corners (no clipped look on phones either).
+### Mobile (phone mockup ref)
+- Two stacked rounded panels inside the hero:
+  1. **Top featured panel** (tall): product image fills, with an overlaid text block on the left ("Edio audio, guided for you" style headline + short line), and a small **"Shop now →"** pill button at the bottom-left, plus a small **"Details"** pill at the bottom-right — mirroring the mockup.
+  2. **Bottom teaser strip**: a shorter rounded panel peeking below with a second image + one-line teaser ("Essential bundles" style), acting as a preview of the next section.
+- Everything rounded, sits on the cream background, matches the Luminous Labs mobile card language.
 
-## 2. Language switcher animation
+### CTAs
+- Keep primary **Explore** and secondary **Shop headphones** on desktop.
+- On mobile: single **Shop now →** overlay pill inside the featured panel + **Details** ghost pill (like the mockup).
 
-- Replace the current instant toggle with a sliding-thumb pill (EN | AR) — animated pill indicator glides between the two labels using a transform transition (spring-ish easing, ~250ms).
-- On switch, animate the whole page: fade + short 8px slide on `<main>` when `dir` flips, and swap `font-family` via the `html[lang]` selector so Switzer ↔ IBM Plex Sans Arabic transition is smooth.
-- Toggle visible on mobile too (currently hidden `sm:inline-flex`).
+## 2. Footer cleanup
+- Remove **"Baghdad, Iraq"** from the bottom bar.
+- Remove the entire **"We accept · ZainCash · Cash on Delivery · KeyCard"** row.
+- Bottom bar becomes just: `© {year} Edio` on the left, socials or nothing on the right.
 
-## 3. Font enforcement (Edio identity only)
+## 3. Font question (need your call before I touch styles)
 
-- Ensure the site uses only Switzer (EN) and IBM Plex Sans Arabic (AR) — no Tailwind default sans fallback leaking in.
-- Set `body { font-family: var(--font-en-main); }` and `html[lang="ar"] body { font-family: var(--font-ar-main); }` at the top of the cascade.
-- Force headings/buttons/nav to inherit (remove any implicit `font-sans` from shadcn defaults on hero/header/footer components).
-- Weight 500 dominant per brand rule; verify hero H1, nav, CTAs all render in Switzer 500.
+You linked Geist. Two ways to read that:
 
-## 4. Footer — full Edio identity
+**A.** Replace Switzer with **Geist** as the English placeholder until Saans is licensed. (Geist is free/OFL, safe to bundle.)
 
-Three-column footer (stacks on mobile) inside a rounded cream/white panel:
+**B.** Keep Switzer per the earlier locked spec, and Geist was just a reference you were looking at.
 
-- **Left:** Edio logo lockup + one-line brand tagline ("Sound, guided.") + socials row: Instagram, Telegram, TikTok, WhatsApp *(need handles — see question)*.
-- **Middle:** Shop links — Headphones, IEMs, DAC & AMPS, Deals.
-- **Right:** Support & legal — Privacy Policy, Terms of Service, Refund Policy, Returns, Warranty, Contact. Each links to a placeholder route (`/legal/privacy`, `/legal/terms`, `/legal/refunds`, `/legal/returns`, `/legal/warranty`, `/contact`) — pages themselves come later, but the links exist now.
-- Bottom bar: © Edio {year} · Baghdad, Iraq · Payments accepted: ZainCash · Cash on Delivery · KeyCard (as small text/badges).
+I need one word: **A** (use Geist) or **B** (keep Switzer). If A, I'll swap the `@font-face` to Geist Variable and repoint `--font-en-main` — no other typography changes.
 
-## 5. Responsiveness pass
+## Files touched
+- `src/components/hero/HeroCard.tsx` — full rewrite for desktop overlay + mobile stacked panels
+- `src/components/site/Footer.tsx` — strip location + payments row
+- `src/styles.css` + font asset (only if you pick **A**)
 
-- Header: pill nav collapses to hamburger < md (already does) — verify lang toggle also appears in mobile drawer with animation.
-- Hero: single column < lg; image keeps rounded card corners on mobile, no overflow.
-- Footer: 1 col mobile → 3 col md+.
-- Use `grid-cols-[minmax(0,1fr)_auto]` + `min-w-0` + `truncate` patterns on all rows containing icons + text so nothing clips on 360px widths.
-
-## Technical notes
-
-- Files touched: `src/components/hero/HeroCard.tsx`, `src/components/site/Header.tsx`, `src/components/site/Footer.tsx`, `src/components/site/LangToggle.tsx`, `src/styles.css` (font enforcement + tiny page-transition keyframes).
-- No new dependencies — animations via Tailwind + CSS transitions only.
-
-## One thing I need from you before building
-
-Social handles for the footer — you mentioned Telegram + Instagram earlier (`t.me/edio_iq`, `instagram.com/edio.iq`). Should I also add **TikTok** and **WhatsApp**, and if yes, what are the handles/numbers? If not, I'll keep just Telegram + Instagram.
+Answer the Geist question and I'll build.

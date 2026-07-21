@@ -1,24 +1,10 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "@fontsource-variable/geist";
 
-/* Edio bilingual typography — placeholders until Saans + TT Neoris Pro are licensed */
+/* Edio bilingual typography — Geist (EN) + IBM Plex Sans Arabic (AR placeholder for TT Neoris Pro) */
 
-/* Switzer (EN placeholder for Saans) — variable font */
-@font-face {
-  font-family: "Switzer";
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url("/__l5e/assets-v1/423b56bf-257b-45a6-842b-6d6724275988/Switzer-Variable.woff2") format("woff2-variations");
-}
-@font-face {
-  font-family: "Switzer";
-  font-style: italic;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url("/__l5e/assets-v1/99144971-c3c9-4706-ab89-7c1e2314d21a/Switzer-VariableItalic.woff2") format("woff2-variations");
-}
 
 /* IBM Plex Sans Arabic (AR placeholder for TT Neoris Pro) */
 @font-face {
@@ -111,7 +97,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   /* Edio typography tokens — permanent, resolved per html[lang] */
-  --font-en-main: "Switzer", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-en-main: "Geist Variable", "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-ar-main: "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-technical: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-sans: var(--font-en-main);
