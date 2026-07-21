@@ -1,55 +1,77 @@
-# Cleanup & Header/Mobile Fixes
+# Edio MVP Redesign — Minimal Editorial Homepage
 
-## 1. Fonts — Edio (TT Neoris Pro) only
+Rebuild the homepage into a spacious, premium, product-focused MVP inspired by the Luminous Labs reference. Keep Edio brand identity (logo, cream bg, navy text, soft blue accents), full bilingual EN/AR with correct RTL, and all utility controls (lang, currency, search, account, cart).
 
-- Remove **all** other font files and references:
-  - Delete IBM Plex Sans Arabic, IBM Plex Mono, Switzer, and Geist Variable from `src/assets/fonts/` and from the CDN asset pointers.
-  - Remove `@fontsource-variable/geist` from `package.json`.
-  - Remove every `@font-face` / `@import` for those families in `src/styles.css`.
-  - Remove `--font-technical` and any `font-technical` utility usage (SKUs, prices go back to Neoris).
-- Upload the TT Neoris Pro Trial `.woff2` weights (Regular 400, Medium 500, DemiBold 600, Bold 700) as Lovable Assets and wire them via `@font-face`.
-- Set both `--font-en-main` and `--font-ar-main` to `"TT Neoris Pro Trial"`. `body`/`html[lang="ar"]`/`html[lang="en"]` all resolve to Neoris — no other family in the stack except the generic `system-ui` fallback.
+## Scope
 
-> Note: the uploaded zip only ships the Latin cut of Neoris. Arabic glyphs will fall back to the browser's default Arabic system face until you upload the Arabic cut. I'll flag this in the code so it's easy to drop in later.
+Only four surfaces exist in this MVP: **Header, Hero, Category strip, Footer**. No animations, carousels, testimonials, filters, or extra sections.
 
-## 2. Language & currency switchers
+## 1. Header (`src/components/site/Header.tsx`)
 
-- **Direction bug** — today toggling AR flips `<html dir="rtl">`, which mirrors the whole page including the switcher itself. Fix: keep `<html dir>` on `ltr`, and instead scope RTL to the content shell (`<main dir="rtl">` / `<footer dir="rtl">`) so header controls stay in place. Buttons/icons that need mirroring (arrows, chevrons) use `rtl:rotate-180` inside the RTL scope only.
-- **EN|AR pill** — match the reference (image-12): navy thumb over the *active* label, active text cream, inactive text muted navy. Fix the current bug where inactive label renders dark on the navy thumb.
-- **USD dropdown** — match reference (image-10): light-blue pill with chevron; open panel shows `$ USD` and `د.ع IQD` rows, active row navy with cream text. Currency symbol on the leading side, code on the trailing side, both aligned.
+- Height 80–100px, sticky, cream/blur background, no border.
+- **EN layout**: Logo left → centered nav → utilities right.
+- **AR layout**: Logo right → centered nav → utilities left (natural RTL flip; scope `dir="rtl"` on the header wrapper when `lang="ar"`).
+- Nav links (centered, plain text — no pills): Headphones, Speakers, Microphones, Audio Equipment, Brands. Add matching keys to `src/lib/i18n.tsx`.
+- **Shop** button: outlined pill (1px navy border, transparent bg) — the only pill in the header.
+- Utilities cluster: `LangToggle` (EN|AR minimal), `CurrencyToggle` (USD/IQD, simplified — no heavy blue bg), `FiSearch`, `FiUser`, `FiShoppingBag` with cart badge. Uniform 20px line icons, 40px hit targets, no hover pill fills.
+- Remove excess blue backgrounds behind icons.
 
-## 3. Header — remove center categories
+## 2. Hero (`src/components/hero/HeroCard.tsx`)
 
-- Delete the center category nav (Headphones / IEMs / DAC & AMPS / Deals pills) from the desktop header per reference (image-14).
-- Header becomes exactly: **Edio logo pill (left)** — **spacer** — **EN|AR + USD + search + account + cart (right)**.
-- Delete `CategoryProvider`, `CategoryView`, and the dummy category grid I added last turn (that flow lives elsewhere later).
-- Restore `src/routes/index.tsx` to render just `<HeroCard />` in `<main>`.
+Single full-width editorial card directly below header.
 
-## 4. Mobile
+- Max-width 1440px, desktop height 600–680px, radius 32–40px, soft single shadow.
+- Full-bleed product image (reuse `edio-hero.png` for now) with a subtle left-side gradient overlay only where text sits — keep the product occupying most of the frame.
+- Content block (aligned start in EN, end in AR), stacked with generous whitespace:
+  - Small uppercase category label
+  - Large headline, max 4 words
+  - One short supporting sentence
+  - Primary **Explore** button (solid navy) + secondary **Shop Audio** button (outlined navy)
+- **Copy**
+  - EN: "Curated Audio" / "Hear the Difference" / "Discover hand-picked audio gear for a clearer, richer experience." / "Explore" / "Shop Audio"
+  - AR: "صوتيات مختارة" / "اسمع الفرق" / "اكتشف أجهزة صوتية مختارة بعناية لتجربة أوضح وأغنى." / "استكشف" / "تسوق الصوتيات"
+- Delete the current mobile "Essential bundles"/teaser block entirely (already partly removed — verify gone).
 
-- **Header**: same layout as desktop reference — logo pill left, EN|AR + USD + cart right. Remove the hamburger + drawer (no categories to open). Search/account collapse into a single search icon on <640px to fit.
-- **Hero card**: rebuild to match the earlier mobile reference — full-bleed hero image, overlaid eyebrow + headline top-start, `Shop now` + `Details` pill row bottom.
-- **Remove "Curated by Edio"** — delete the "Essential bundles" teaser strip below the hero entirely (image-11/13 shown to confirm removal target).
+## 3. Category strip (new `src/components/home/CategoryStrip.tsx`)
 
-## 5. Hide scrollbars globally
+Below the hero. Simple horizontal row of 4 minimal category cards:
 
-- Add a global utility in `src/styles.css` that hides scrollbars everywhere while keeping scroll behavior:
+- Headphones · Speakers · Microphones · Audio Equipment
+- Each: small icon (react-icons), category name, thin hairline separator or transparent card — no floating boxes, no badges.
+- Grid: 4 cols desktop, 2 cols tablet, horizontal scroll on mobile (scrollbars already hidden globally).
+- Placeholder `href="#"` links; no product data required for MVP.
 
-```css
-html, body { scrollbar-width: none; -ms-overflow-style: none; }
-*::-webkit-scrollbar { display: none; }
-```
+## 4. Footer (`src/components/site/Footer.tsx`)
+
+Keep existing minimal structure. Trim any residual clutter, ensure it uses only line icons + text. No changes to legal link list.
+
+## 5. Responsive rules
+
+- **Desktop (≥1024px)**: full nav visible, hero 600–680px.
+- **Tablet (640–1023px)**: nav condenses (reduced gaps), hero ~480px, category strip 2-col.
+- **Mobile (<640px)**: hamburger menu replaces center nav (drawer with the 5 nav links + Shop), utility cluster collapses to Search + Cart, hero stacks (text above image or overlaid on shorter image ~420px), category strip becomes horizontal snap-scroll.
+- RTL verified on all three breakpoints — mirrored order, text alignment, and icon direction (`rtl:rotate-180` on arrows only).
+
+## 6. Typography & tokens
+
+- Continue using TT Neoris Pro (already wired) for Latin.
+- Add **IBM Plex Sans Arabic** via `<link>` in `__root.tsx` head as the Arabic fallback until the Neoris Arabic cut is delivered. Update `--font-ar-main` in `src/styles.css` to prefer it. (Reverses the earlier full purge — user is now explicitly requesting an Arabic-compatible fallback.)
+- 8px spacing scale, consistent radii (buttons 9999px, cards 32–40px), navy `#090A32` primary text.
 
 ## Files touched
 
-- `src/styles.css` — font-faces rewritten, scrollbar hide, RTL scoping helper.
-- `src/routes/__root.tsx` — drop `CategoryProvider`, keep `<html dir="ltr">` always.
-- `src/routes/index.tsx` — hero only.
-- `src/components/site/Header.tsx` — strip center nav, tighten right cluster, mobile parity.
-- `src/components/site/LangToggle.tsx` — remove `dir` mutation, fix active-label color.
-- `src/components/site/CurrencyToggle.tsx` — restyle open panel to match image-10.
-- `src/components/hero/HeroCard.tsx` — mobile hero rebuilt, teaser strip removed.
-- `src/components/category/CategoryView.tsx`, `src/lib/category.tsx` — deleted.
-- `src/assets/fonts/*` — IBM Plex / Switzer / Geist pointers deleted; Neoris pointers added.
-- `package.json` — drop `@fontsource-variable/geist`.
-- `mem://` — update index + typography memory to reflect Neoris-only stack and header composition.
+- `src/components/site/Header.tsx` — rebuild
+- `src/components/site/LangToggle.tsx` — visual simplification
+- `src/components/site/CurrencyToggle.tsx` — remove heavy blue bg
+- `src/components/hero/HeroCard.tsx` — rebuild editorial hero
+- `src/components/home/CategoryStrip.tsx` — new
+- `src/components/site/Footer.tsx` — light cleanup
+- `src/routes/index.tsx` — render Header + Hero + CategoryStrip + Footer
+- `src/routes/__root.tsx` — add IBM Plex Arabic `<link>`; add mobile nav drawer state if needed
+- `src/lib/i18n.tsx` — new nav keys + hero copy
+- `src/styles.css` — Arabic font var, spacing helpers if needed
+- `mem://index.md` — record MVP scope + Arabic fallback decision
+
+## Out of scope (MVP)
+
+Animations, video, carousels, filters, testimonials, promo strips, product detail pages, cart drawer, checkout.
