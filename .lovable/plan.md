@@ -1,77 +1,50 @@
+# Hero + Header + Footer refinement
 
-## Scope
+Scope: only the pieces you listed. No new pages, no product data yet.
 
-Only the hero landing on `/`. No product listing, no auth, no backend, no legal pages. Those come later per your roadmap.
+## 1. Hero section — full-bleed Luminous Labs style
 
-## Language decision (flagging one conflict)
+- Remove the "Sound, guided." pill entirely.
+- Turn the hero into one full-width rounded card (Luminous Labs composition): copy on the left, product photo on the right occupying the full right half of the card — image fills the panel edge-to-edge, no white gap, no drop-shadow float.
+- Rebalance grid so the image reads as an integral panel (right column ~55% on desktop, background tinted panel behind it, image fitted with `object-cover` + subtle inner mask, not a clipped centered PNG).
+- Keep headline "Find the sound that fits you." + subcopy.
+- Replace the "How it works" secondary CTA with **"Shop headphones"** (useful, on-store). Primary CTA stays "Explore" → will point at the catalog once it exists.
+- Mobile: image stacks under copy at full card width with matching rounded corners (no clipped look on phones either).
 
-You said "don't add Arabic" for hero copy, and the nav labels you gave are English (Headphones / IEMs / DAC & AMPS / Deals). Memory currently locks Arabic-as-default. I will:
+## 2. Language switcher animation
 
-- Flip the default document to `<html lang="en" dir="ltr">` for now.
-- Keep the AR/EN toggle wired; clicking AR switches to `lang="ar" dir="rtl"` and swaps the font stack via the existing `html[lang]` rules — no layout rewrites needed later.
-- Update memory so Arabic-first is no longer a hard rule; it becomes "bilingual with EN default, AR fully supported."
+- Replace the current instant toggle with a sliding-thumb pill (EN | AR) — animated pill indicator glides between the two labels using a transform transition (spring-ish easing, ~250ms).
+- On switch, animate the whole page: fade + short 8px slide on `<main>` when `dir` flips, and swap `font-family` via the `html[lang]` selector so Switzer ↔ IBM Plex Sans Arabic transition is smooth.
+- Toggle visible on mobile too (currently hidden `sm:inline-flex`).
 
-If you actually want AR as the default and English only as a secondary toggle, say so and I'll flip it.
+## 3. Font enforcement (Edio identity only)
 
-## Header
+- Ensure the site uses only Switzer (EN) and IBM Plex Sans Arabic (AR) — no Tailwind default sans fallback leaking in.
+- Set `body { font-family: var(--font-en-main); }` and `html[lang="ar"] body { font-family: var(--font-ar-main); }` at the top of the cascade.
+- Force headings/buttons/nav to inherit (remove any implicit `font-sans` from shadcn defaults on hero/header/footer components).
+- Weight 500 dominant per brand rule; verify hero H1, nav, CTAs all render in Switzer 500.
 
-- Left: `<EdioLogo />` pill lockup (already built).
-- Center: nav pill with 4 links — **Headphones · IEMs · DAC & AMPS · Deals**.
-- Right: `EN / AR` toggle (visual only for now, updates `document.documentElement.lang` + `dir`) and a minimal cart icon (non-functional placeholder).
-- Sticky, translucent cream background, rounded pill container, matches Luminous Labs header proportions.
+## 4. Footer — full Edio identity
 
-## Hero card (the one big Luminous-Labs-style rounded block)
+Three-column footer (stacks on mobile) inside a rounded cream/white panel:
 
-- Massive `rounded-[2.5rem]` card, cream page background, card interior uses a soft blue gradient consistent with Edio palette (not red like the reference — Edio is navy/blue).
-- Left side (desktop) / top (mobile): short premium English copy. I'll write it with the best model in Edio's calm-guide voice. Draft direction (final in build):
-  - Eyebrow: `Sound, guided.`
-  - Headline (Saans-placeholder Switzer Medium, ~72px desktop / 40px mobile, tight tracking): `Find the sound that fits you.`
-  - Sub (Switzer Regular, muted navy): `Edio helps you choose the right audio gear — no noise, no pressure.`
-  - CTA: solid navy pill `Explore` + ghost pill `How it works`.
-- Right side / bottom: the product-group photo you uploaded (silver/white gear on light-blue cubes) placed inside the card with generous padding, subtle drop shadow, no crop.
-- All numbers/specs (if any tiny label appears) use `--font-technical` (IBM Plex Mono).
+- **Left:** Edio logo lockup + one-line brand tagline ("Sound, guided.") + socials row: Instagram, Telegram, TikTok, WhatsApp *(need handles — see question)*.
+- **Middle:** Shop links — Headphones, IEMs, DAC & AMPS, Deals.
+- **Right:** Support & legal — Privacy Policy, Terms of Service, Refund Policy, Returns, Warranty, Contact. Each links to a placeholder route (`/legal/privacy`, `/legal/terms`, `/legal/refunds`, `/legal/returns`, `/legal/warranty`, `/contact`) — pages themselves come later, but the links exist now.
+- Bottom bar: © Edio {year} · Baghdad, Iraq · Payments accepted: ZainCash · Cash on Delivery · KeyCard (as small text/badges).
 
-## Footer (minimal, this step only)
+## 5. Responsiveness pass
 
-- Small centered row: Edio wordmark · © 2026 · Telegram (`t.me/edio_iq`) · Instagram (`instagram.com/edio.iq`).
-- Placeholder line: "Legal pages coming soon" — real privacy/returns/terms land in a later step.
+- Header: pill nav collapses to hamburger < md (already does) — verify lang toggle also appears in mobile drawer with animation.
+- Hero: single column < lg; image keeps rounded card corners on mobile, no overflow.
+- Footer: 1 col mobile → 3 col md+.
+- Use `grid-cols-[minmax(0,1fr)_auto]` + `min-w-0` + `truncate` patterns on all rows containing icons + text so nothing clips on 360px widths.
 
-## Responsiveness (locked as a project rule)
+## Technical notes
 
-- Mobile-first. Design and test at 375px first, then scale up.
-- Hero stacks vertically on mobile; image sits below copy, still inside the rounded card, with reduced padding and radius (`rounded-[1.75rem]`).
-- Nav collapses to a hamburger drawer under `md`.
-- Type scales down via `clamp()` — no fixed pixel headings.
-- Absolutely nothing that reads as "AI slop": no purple gradients, no generic hero blobs, no stock 3D shapes, no lorem-style filler, no default shadcn card look. Every surface uses Edio tokens.
+- Files touched: `src/components/hero/HeroCard.tsx`, `src/components/site/Header.tsx`, `src/components/site/Footer.tsx`, `src/components/site/LangToggle.tsx`, `src/styles.css` (font enforcement + tiny page-transition keyframes).
+- No new dependencies — animations via Tailwind + CSS transitions only.
 
-## Memory updates in the same step
+## One thing I need from you before building
 
-- `mem://index.md` Core: change "Arabic-first RTL" → "Bilingual (EN default, AR toggle with RTL). Mobile-first is mandatory. Never AI-slop aesthetics."
-- `mem://design/edio-brand.md`: reflect language default flip + mobile-first + no-AI-slop rule.
-- New `mem://features/nav-and-footer.md`: locks the 4 nav items and the two social URLs so later steps reuse them verbatim.
-
-## Files touched (technical section)
-
-- `src/routes/index.tsx` — replace placeholder with hero page composition.
-- `src/routes/__root.tsx` — flip default `lang`/`dir` to `en`/`ltr`; wire a tiny client-side toggle.
-- `src/components/site/Header.tsx` *(new)* — logo + nav pill + lang toggle.
-- `src/components/site/Footer.tsx` *(new)* — minimal footer.
-- `src/components/hero/HeroCard.tsx` *(new)* — the rounded hero block.
-- `src/components/site/LangToggle.tsx` *(new)* — sets `documentElement.lang`/`dir`.
-- Head metadata on `/`: unique title + description + og:title/description; og:image uses the uploaded product-group CDN URL (leaf route only).
-
-## What I am NOT doing this step
-
-- No product cards on the home page (the featured-products component stays unused until you send catalog data).
-- No AR translations of the hero copy yet (toggle will show EN for both until you send AR strings).
-- No cart, no auth, no checkout, no Swagger wiring.
-- No legal pages, no full footer sitemap.
-
-## What I still need from you eventually (not blocking hero)
-
-- Arabic translations for nav + hero copy (for real AR toggle).
-- Product catalog / Swagger.
-- Final legal copy (or approval to generate standard Shopify-style pages).
-- Confirmation on default language (EN vs AR).
-
-Approve and I'll build the hero exactly to this spec.
+Social handles for the footer — you mentioned Telegram + Instagram earlier (`t.me/edio_iq`, `instagram.com/edio.iq`). Should I also add **TikTok** and **WhatsApp**, and if yes, what are the handles/numbers? If not, I'll keep just Telegram + Instagram.
