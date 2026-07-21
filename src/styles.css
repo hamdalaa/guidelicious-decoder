@@ -2,6 +2,43 @@
 @source "../src";
 @import "tw-animate-css";
 
+/* Edio brand typeface — TT Neoris Pro (Trial) served from Lovable CDN */
+@font-face {
+  font-family: "TT Neoris Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/__l5e/assets-v1/bc34fafd-da64-4b65-97b8-6f9edb750fa8/TTNeorisPro-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "TT Neoris Pro";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/__l5e/assets-v1/92f532fe-460b-4cab-b1d0-0afa04a66867/TTNeorisPro-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "TT Neoris Pro";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/__l5e/assets-v1/6e60da48-4cef-4fba-9e7b-77753ed97310/TTNeorisPro-DemiBold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "TT Neoris Pro";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/__l5e/assets-v1/e40d5a27-f0e1-4456-84f6-dfebeb94204f/TTNeorisPro-Bold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "TT Neoris Pro";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("/__l5e/assets-v1/3ca1788a-9db4-4702-96d3-5cfed4986227/TTNeorisPro-Black.woff2") format("woff2");
+}
+
 @custom-variant dark (&:is(.dark *));
 
 /*
@@ -59,42 +96,60 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Edio brand tokens */
+  --font-sans: "TT Neoris Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "TT Neoris Pro", system-ui, sans-serif;
+  --color-edio-navy: var(--edio-navy);
+  --color-edio-blue: var(--edio-blue);
+  --color-edio-sky: var(--edio-sky);
+  --color-edio-cream: var(--edio-cream);
+  --color-edio-white: var(--edio-white);
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
+  --radius: 1.25rem;
+
+  /* Edio brand palette */
+  --edio-navy: oklch(0.22 0.07 258);
+  --edio-blue: oklch(0.55 0.15 250);
+  --edio-sky: oklch(0.82 0.07 240);
+  --edio-cream: oklch(0.975 0.012 85);
+  --edio-white: oklch(1 0 0);
+
+  /* Semantic tokens mapped to Edio palette */
+  --background: var(--edio-cream);
+  --foreground: var(--edio-navy);
+  --card: var(--edio-white);
+  --card-foreground: var(--edio-navy);
+  --popover: var(--edio-white);
+  --popover-foreground: var(--edio-navy);
+  --primary: var(--edio-navy);
+  --primary-foreground: var(--edio-cream);
+  --secondary: oklch(0.95 0.02 250);
+  --secondary-foreground: var(--edio-navy);
+  --muted: oklch(0.95 0.015 250);
+  --muted-foreground: oklch(0.45 0.03 258);
+  --accent: var(--edio-blue);
+  --accent-foreground: var(--edio-white);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
+  --border: oklch(0.9 0.015 250);
+  --input: oklch(0.9 0.015 250);
+  --ring: var(--edio-blue);
+  --chart-1: var(--edio-navy);
+  --chart-2: var(--edio-blue);
+  --chart-3: var(--edio-sky);
+  --chart-4: oklch(0.7 0.1 240);
+  --chart-5: oklch(0.4 0.1 258);
+  --sidebar: var(--edio-cream);
+  --sidebar-foreground: var(--edio-navy);
+  --sidebar-primary: var(--edio-navy);
+  --sidebar-primary-foreground: var(--edio-cream);
+  --sidebar-accent: oklch(0.95 0.02 250);
+  --sidebar-accent-foreground: var(--edio-navy);
+  --sidebar-border: oklch(0.9 0.015 250);
+  --sidebar-ring: var(--edio-blue);
 }
 
 .dark {
@@ -140,5 +195,7 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
   }
 }
