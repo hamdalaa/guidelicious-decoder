@@ -108,7 +108,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {children}
+        <LangProvider>{children}</LangProvider>
         <Scripts />
       </body>
     </html>
@@ -120,10 +120,8 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <LangProvider>
-        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <Outlet />
-      </LangProvider>
+      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+      <Outlet />
     </QueryClientProvider>
   );
 }
