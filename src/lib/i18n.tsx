@@ -6,22 +6,25 @@ type Dict = Record<string, { en: string; ar: string }>;
 
 export const dict = {
   "nav.cart": { en: "Cart", ar: "السلة" },
+  "nav.shop": { en: "Shop", ar: "تسوق" },
+  "nav.menu": { en: "Menu", ar: "القائمة" },
+  "nav.close": { en: "Close", ar: "إغلاق" },
+  "nav.headphones": { en: "Headphones", ar: "سماعات الرأس" },
+  "nav.speakers": { en: "Speakers", ar: "مكبرات الصوت" },
+  "nav.microphones": { en: "Microphones", ar: "الميكروفونات" },
+  "nav.audioEquipment": { en: "Audio Equipment", ar: "معدات صوتية" },
+  "nav.brands": { en: "Brands", ar: "العلامات" },
 
-  "hero.eyebrow": { en: "New collection", ar: "المجموعة الجديدة" },
-  "hero.brand": { en: "Edio", ar: "إيديو" },
-  "hero.sub": { en: "Audio", ar: "أوديو" },
+  "hero.eyebrow": { en: "Curated Audio", ar: "صوتيات مختارة" },
+  "hero.headline": { en: "Hear the Difference", ar: "اسمع الفرق" },
   "hero.tagline": {
-    en: "Find the sound that fits you — no noise, no pressure.",
-    ar: "اعثر على الصوت الذي يناسبك — بدون ضجيج، بدون ضغط.",
-  },
-  "hero.headline": {
-    en: "Introducing Edio, a new standard in curated audio.",
-    ar: "نقدّم إيديو، معيار جديد في الصوت المختار بعناية.",
+    en: "Discover hand-picked audio gear for a clearer, richer experience.",
+    ar: "اكتشف أجهزة صوتية مختارة بعناية لتجربة أوضح وأغنى.",
   },
   "hero.cta.explore": { en: "Explore", ar: "استكشف" },
-  "hero.cta.shop": { en: "Shop headphones", ar: "تسوّق السماعات" },
-  "hero.cta.shopNow": { en: "Shop now", ar: "تسوّق الآن" },
-  "hero.cta.details": { en: "Details", ar: "التفاصيل" },
+  "hero.cta.shopAudio": { en: "Shop Audio", ar: "تسوق الصوتيات" },
+
+  "categories.title": { en: "Shop by category", ar: "تسوق حسب الفئة" },
 
   "footer.tagline": {
     en: "Sound, guided. Curated audio gear with calm, expert advice — no noise, no pressure.",
