@@ -233,3 +233,13 @@
   font-family: var(--font-technical);
   font-feature-settings: "tnum" 1;
 }
+
+@keyframes edio-lang-swap {
+  0% { opacity: 0.4; transform: translateY(4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.edio-lang-swap {
+  animation: edio-lang-swap 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
