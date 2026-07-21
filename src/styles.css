@@ -97,7 +97,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   /* Edio typography tokens — permanent, resolved per html[lang] */
-  --font-en-main: "Switzer", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-en-main: "Geist Variable", "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-ar-main: "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-technical: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-sans: var(--font-en-main);

@@ -86,21 +86,8 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-10 flex flex-col gap-4 border-t border-edio-navy/10 pt-6 text-xs text-edio-navy/60 sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {new Date().getFullYear()} Edio · Baghdad, Iraq
-          </p>
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-edio-navy/50">We accept</span>
-            {PAYMENTS.map((p) => (
-              <span
-                key={p}
-                className="rounded-full bg-edio-sky/40 px-2.5 py-1 text-[11px] font-medium text-edio-navy"
-              >
-                {p}
-              </span>
-            ))}
-          </div>
+        <div className="mt-10 border-t border-edio-navy/10 pt-6 text-xs text-edio-navy/60">
+          <p>© {new Date().getFullYear()} Edio</p>
         </div>
       </div>
     </footer>
