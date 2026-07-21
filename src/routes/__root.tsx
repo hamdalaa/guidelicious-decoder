@@ -11,7 +11,6 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { LangProvider } from "@/i18n/LangProvider";
 
 function NotFoundComponent() {
   return (
@@ -108,7 +107,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <LangProvider>{children}</LangProvider>
+        {children}
         <Scripts />
       </body>
     </html>

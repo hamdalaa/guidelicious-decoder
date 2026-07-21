@@ -1,60 +1,43 @@
+# Hero rework + footer cleanup + Geist question
 
-## 1. Streamline icons (Ultimate Regular – Free)
+## 1. Hero — match the Luminous Labs UI exactly
 
-- Add a thin `StreamlineIcon` wrapper that loads SVGs on-demand from Streamline's public CDN:
-  `https://cdn.streamlinehq.com/icons/ultimate-regular-free/{slug}.svg`
-  (inlined via `fetch` + `dangerouslySetInnerHTML` so we can recolor with `currentColor`).
-- Replace every `lucide-react` icon in the header, hero, footer, and product cards with `StreamlineIcon` using the mapped Ultimate Regular slugs (menu, close, cart, arrow-left, chevron, headphones, etc.).
-- Cache fetched SVGs in a module-level `Map` so each icon is fetched once per session.
+### Desktop (image ref 2)
+- One large rounded hero card that **is** the product image (edge-to-edge, no side panel).
+- Copy overlays on top of the image on the left:
+  - Small product label row: **"Edio"** in bold + **"Audio"** in muted grey, aligned like "Kini Wearable".
+  - No headline in a separate white column — headline sits on the image itself in the top-left area.
+- Product photo bleeds to all edges of the card; card has same big rounded corners as reference.
+- Right side of card is pure image (no white content column).
 
-Note: no API key needed for the free set; if the CDN path 404s at build time we fall back to committing the small set of SVGs we use into `src/assets/icons/`.
+### Mobile (phone mockup ref)
+- Two stacked rounded panels inside the hero:
+  1. **Top featured panel** (tall): product image fills, with an overlaid text block on the left ("Edio audio, guided for you" style headline + short line), and a small **"Shop now →"** pill button at the bottom-left, plus a small **"Details"** pill at the bottom-right — mirroring the mockup.
+  2. **Bottom teaser strip**: a shorter rounded panel peeking below with a second image + one-line teaser ("Essential bundles" style), acting as a preview of the next section.
+- Everything rounded, sits on the cream background, matches the Luminous Labs mobile card language.
 
-## 2. Header — rebuild to match `image-3.png`
+### CTAs
+- Keep primary **Explore** and secondary **Shop headphones** on desktop.
+- On mobile: single **Shop now →** overlay pill inside the featured panel + **Details** ghost pill (like the mockup).
 
-Discard the current pill-nav header. New composition, identical on mobile and desktop (only spacing scales):
+## 2. Footer cleanup
+- Remove **"Baghdad, Iraq"** from the bottom bar.
+- Remove the entire **"We accept · ZainCash · Cash on Delivery · KeyCard"** row.
+- Bottom bar becomes just: `© {year} Edio` on the left, socials or nothing on the right.
 
-```text
-[ ← back ]   [ 🎧 ](sky pill)  Edio          [ EN | ع ]  [ 🛒 ]
-```
+## 3. Font question (need your call before I touch styles)
 
-- Left: circular back button (Streamline `arrow-left`) on white.
-- Center-left: light-blue pill (`bg-edio-sky/60`) containing the Edio icon logo + wordmark "Edio" in Geist 500.
-- Right: language toggle + cart button, both circular white chips.
-- No nav links in the bar (matches reference); category nav moves to the hero section / a secondary strip later.
-- Sticky, translucent cream background, same rounded-full container.
-- Fully responsive: same layout at every breakpoint, only padding/size tokens change (no separate mobile drawer, no hamburger).
+You linked Geist. Two ways to read that:
 
-## 3. Language toggle — fix + real-time i18n
+**A.** Replace Switzer with **Geist** as the English placeholder until Saans is licensed. (Geist is free/OFL, safe to bundle.)
 
-Current bugs:
-- Selected label renders black because `text-edio-cream` isn't resolving against the navy thumb on some states → switch to explicit `text-white` token via `--edio-on-navy` and ensure the inactive state uses `text-edio-navy/60`.
-- Clicking "ع" flips `dir`/`lang` but no visible content changes because strings are hard-coded English.
+**B.** Keep Switzer per the earlier locked spec, and Geist was just a reference you were looking at.
 
-Fix:
-- Create `src/i18n/strings.ts` with an `en` / `ar` dictionary covering every visible string currently on the site (header labels, hero headline + subcopy + CTAs, footer columns, product card copy).
-- Create `src/i18n/LangProvider.tsx`: React context holding `{ lang, setLang, t(key) }`. On `setLang` it:
-  1. writes `documentElement.lang` + `dir`
-  2. persists to `localStorage`
-  3. triggers the existing `edio-lang-swap` fade
-- Wrap `<RootComponent>` children in `<LangProvider>`.
-- Replace all hard-coded strings in `Header`, `HeroCard`, `Footer`, `FeaturedProducts`, `BuyNowButton` with `t("…")`.
-- `LangToggle` reads `lang` / `setLang` from context (no local state), so switching is instantaneous everywhere.
-- Labels shown in the toggle: `EN` and `ع` (Arabic glyph, not "AR"), matching brand tone.
-- Font swap already handled by `html[lang="ar"]` selector in `src/styles.css` — verify `--font-ar-main` (IBM Plex Sans Arabic placeholder for Edio Arabic) is applied to `<html>` and inherits everywhere; add `font-family: var(--font-ar-main)` on `body[dir="rtl"]` as belt-and-suspenders.
-
-## 4. Mobile parity
-
-- Remove the mobile drawer + hamburger from the header.
-- Hero, header, footer keep the desktop composition on mobile, only scaling type and padding — no separate mobile-only layouts.
-
-## 5. Verification
-
-After build:
-- Toggle EN ↔ ع and confirm: header/hero/footer strings swap, `dir` flips, font switches to Arabic, active pill stays readable (white on navy) in both states, layout mirrors correctly.
-- Confirm Streamline SVGs render and recolor on hover.
+I need one word: **A** (use Geist) or **B** (keep Switzer). If A, I'll swap the `@font-face` to Geist Variable and repoint `--font-en-main` — no other typography changes.
 
 ## Files touched
+- `src/components/hero/HeroCard.tsx` — full rewrite for desktop overlay + mobile stacked panels
+- `src/components/site/Footer.tsx` — strip location + payments row
+- `src/styles.css` + font asset (only if you pick **A**)
 
-- new: `src/components/StreamlineIcon.tsx`, `src/i18n/strings.ts`, `src/i18n/LangProvider.tsx`
-- rewrite: `src/components/site/Header.tsx`, `src/components/site/LangToggle.tsx`
-- edit: `src/routes/__root.tsx` (mount provider), `src/components/site/HeroCard.tsx`, `src/components/site/Footer.tsx`, `src/components/FeaturedProducts.tsx`, `src/components/BuyNowButton.tsx`, `src/styles.css` (Arabic font fallback rule + toggle color token)
+Answer the Geist question and I'll build.
