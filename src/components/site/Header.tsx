@@ -38,7 +38,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <LangToggle className="hidden sm:inline-flex" />
+          <LangToggle />
           <button
             type="button"
             aria-label="Cart"
@@ -76,9 +76,6 @@ export function Header() {
               </a>
             </li>
           ))}
-          <li className="px-4 py-3">
-            <LangToggle />
-          </li>
         </ul>
       </div>
     </header>
