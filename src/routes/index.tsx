@@ -1,24 +1,41 @@
 import { createFileRoute } from "@tanstack/react-router";
+import heroImg from "@/assets/hero/edio-hero.png.asset.json";
+import { Header } from "@/components/site/Header";
+import { Footer } from "@/components/site/Footer";
+import { HeroCard } from "@/components/hero/HeroCard";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const HERO_IMG_URL = `https://cdn.gpteng.co${heroImg.url}`;
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Edio — Sound, guided." },
+      {
+        name: "description",
+        content:
+          "Edio helps you choose the right audio gear — headphones, IEMs, DACs and amps — with calm, expert guidance.",
+      },
+      { property: "og:title", content: "Edio — Sound, guided." },
+      {
+        property: "og:description",
+        content:
+          "Find the sound that fits you. Curated headphones, IEMs, DACs and amps, guided by Edio.",
+      },
+      { property: "og:image", content: HERO_IMG_URL },
+      { name: "twitter:image", content: HERO_IMG_URL },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-edio-cream">
+      <Header />
+      <main>
+        <HeroCard />
+      </main>
+      <Footer />
     </div>
   );
 }
