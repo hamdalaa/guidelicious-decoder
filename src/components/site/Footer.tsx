@@ -1,34 +1,33 @@
 import { Send, Instagram } from "lucide-react";
 import { EdioLogo } from "@/components/EdioLogo";
+import { useI18n, type TKey } from "@/lib/i18n";
 
-const SHOP = [
-  { label: "Headphones", href: "#headphones" },
-  { label: "IEMs", href: "#iems" },
-  { label: "DAC & AMPS", href: "#dac-amps" },
-  { label: "Deals", href: "#deals" },
+const SHOP: { key: TKey; href: string }[] = [
+  { key: "nav.headphones", href: "#headphones" },
+  { key: "nav.iems", href: "#iems" },
+  { key: "nav.dac", href: "#dac-amps" },
+  { key: "nav.deals", href: "#deals" },
 ];
 
-const SUPPORT = [
-  { label: "Privacy Policy", href: "/legal/privacy" },
-  { label: "Terms of Service", href: "/legal/terms" },
-  { label: "Refund Policy", href: "/legal/refunds" },
-  { label: "Returns", href: "/legal/returns" },
-  { label: "Warranty", href: "/legal/warranty" },
-  { label: "Contact", href: "/contact" },
+const SUPPORT: { key: TKey; href: string }[] = [
+  { key: "footer.privacy", href: "/legal/privacy" },
+  { key: "footer.terms", href: "/legal/terms" },
+  { key: "footer.refunds", href: "/legal/refunds" },
+  { key: "footer.returns", href: "/legal/returns" },
+  { key: "footer.warranty", href: "/legal/warranty" },
+  { key: "footer.contact", href: "/contact" },
 ];
-
-
 
 export function Footer() {
+  const { t } = useI18n();
   return (
     <footer className="px-3 pb-6 pt-16 sm:px-6">
       <div className="mx-auto max-w-7xl rounded-[1.75rem] bg-white/70 p-6 sm:rounded-[2rem] sm:p-10">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
-          {/* Brand */}
           <div className="min-w-0">
             <EdioLogo size="sm" />
             <p className="mt-4 max-w-xs text-sm text-edio-navy/70">
-              Sound, guided. Curated audio gear with calm, expert advice — no noise, no pressure.
+              {t("footer.tagline")}
             </p>
             <div className="mt-5 flex items-center gap-2">
               <a
@@ -52,32 +51,30 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Shop */}
           <div className="min-w-0">
             <h4 className="text-xs font-medium uppercase tracking-[0.15em] text-edio-navy/50">
-              Shop
+              {t("footer.shop")}
             </h4>
             <ul className="mt-4 space-y-2.5 text-sm text-edio-navy/80">
               {SHOP.map((l) => (
-                <li key={l.label}>
+                <li key={l.key}>
                   <a href={l.href} className="transition-colors hover:text-edio-navy">
-                    {l.label}
+                    {t(l.key)}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Support & Legal */}
           <div className="min-w-0">
             <h4 className="text-xs font-medium uppercase tracking-[0.15em] text-edio-navy/50">
-              Support & Legal
+              {t("footer.support")}
             </h4>
             <ul className="mt-4 space-y-2.5 text-sm text-edio-navy/80">
               {SUPPORT.map((l) => (
-                <li key={l.label}>
+                <li key={l.key}>
                   <a href={l.href} className="transition-colors hover:text-edio-navy">
-                    {l.label}
+                    {t(l.key)}
                   </a>
                 </li>
               ))}
@@ -85,7 +82,6 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
         <div className="mt-10 border-t border-edio-navy/10 pt-6 text-xs text-edio-navy/60">
           <p>© {new Date().getFullYear()} Edio</p>
         </div>
