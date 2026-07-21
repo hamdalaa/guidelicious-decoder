@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { HeroCard } from "@/components/hero/HeroCard";
+import { CategoryStrip } from "@/components/home/CategoryStrip";
 import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/")({
@@ -11,13 +12,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Edio helps you choose the right audio gear — headphones, IEMs, DACs and amps — with calm, expert guidance.",
+          "Edio helps you choose the right audio gear — headphones, speakers, microphones, and audio equipment — with calm, expert guidance.",
       },
       { property: "og:title", content: "Edio — Sound, guided." },
       {
         property: "og:description",
         content:
-          "Find the sound that fits you. Curated headphones, IEMs, DACs and amps, guided by Edio.",
+          "Find the sound that fits you. Curated headphones, speakers, microphones and audio equipment.",
       },
     ],
   }),
@@ -31,6 +32,7 @@ function Index() {
       <Header />
       <main dir={dir}>
         <HeroCard />
+        <CategoryStrip />
       </main>
       <Footer />
     </div>

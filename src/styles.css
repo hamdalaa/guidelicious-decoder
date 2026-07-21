@@ -76,9 +76,9 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Edio typography tokens — TT Neoris Pro ONLY */
+  /* Edio typography tokens */
   --font-en-main: "TT Neoris Pro", system-ui, sans-serif;
-  --font-ar-main: "TT Neoris Pro", system-ui, sans-serif;
+  --font-ar-main: "IBM Plex Sans Arabic", "TT Neoris Pro", system-ui, sans-serif;
   --font-sans: var(--font-en-main);
   --font-display: var(--font-en-main);
 
@@ -151,6 +151,10 @@
 
   html {
     font-family: var(--font-en-main);
+  }
+
+  html[lang="ar"] {
+    font-family: var(--font-ar-main);
   }
 
   body {

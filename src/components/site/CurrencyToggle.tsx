@@ -30,7 +30,7 @@ export function CurrencyToggle({ className }: { className?: string }) {
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="listbox"
         aria-expanded={open}
-        className="inline-flex h-9 items-center gap-1.5 rounded-full bg-edio-sky/60 px-3.5 text-[11px] font-semibold uppercase tracking-wide text-edio-navy transition-colors hover:bg-edio-sky/80"
+        className="inline-flex h-9 items-center gap-1 rounded-full px-2 text-[12px] font-semibold uppercase tracking-wider text-edio-navy transition-colors hover:text-edio-navy/70"
       >
         <span>{current}</span>
         <FiChevronDown
@@ -40,7 +40,7 @@ export function CurrencyToggle({ className }: { className?: string }) {
       <div
         role="listbox"
         className={cn(
-          "absolute left-0 mt-2 min-w-[7rem] origin-top overflow-hidden rounded-2xl bg-white p-1 shadow-[0_20px_50px_-20px_rgba(9,10,50,0.35)] transition-all",
+          "absolute end-0 mt-2 min-w-[8rem] origin-top overflow-hidden rounded-2xl border border-edio-navy/10 bg-white p-1 shadow-[0_20px_50px_-20px_rgba(9,10,50,0.25)] transition-all",
           open ? "scale-100 opacity-100" : "pointer-events-none scale-95 opacity-0",
         )}
       >
@@ -57,16 +57,14 @@ export function CurrencyToggle({ className }: { className?: string }) {
                 setOpen(false);
               }}
               className={cn(
-                "flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm font-semibold transition-colors",
+                "flex w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-sm font-semibold transition-colors",
                 active
                   ? "bg-edio-navy text-edio-cream"
-                  : "text-edio-navy hover:bg-edio-sky/40",
+                  : "text-edio-navy hover:bg-edio-navy/5",
               )}
             >
-              <span className={cn("w-6 text-start text-[13px]", active ? "opacity-80" : "opacity-60")}>
-                {symbol}
-              </span>
               <span className="uppercase tracking-wide">{code}</span>
+              <span className="text-[13px] opacity-80">{symbol}</span>
             </button>
           );
         })}
