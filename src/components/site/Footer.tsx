@@ -17,7 +17,7 @@ const SUPPORT = [
   { label: "Contact", href: "/contact" },
 ];
 
-const PAYMENTS = ["ZainCash", "Cash on Delivery", "KeyCard"];
+
 
 export function Footer() {
   return (
