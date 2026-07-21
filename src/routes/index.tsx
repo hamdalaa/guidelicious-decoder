@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { HeroCard } from "@/components/hero/HeroCard";
+import { CategoryView } from "@/components/category/CategoryView";
+import { useCategory } from "@/lib/category";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,14 +25,12 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-
 function Index() {
+  const { active } = useCategory();
   return (
     <div className="min-h-screen bg-edio-cream">
       <Header />
-      <main>
-        <HeroCard />
-      </main>
+      <main>{active ? <CategoryView /> : <HeroCard />}</main>
       <Footer />
     </div>
   );
