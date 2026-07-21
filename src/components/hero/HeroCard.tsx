@@ -1,17 +1,17 @@
-import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { FiArrowUpRight, FiArrowRight } from "react-icons/fi";
 import heroImg from "@/assets/hero/edio-hero.png.asset.json";
 import { useI18n } from "@/lib/i18n";
 
 export function HeroCard() {
-  const { t } = useI18n();
+  const { t, dir } = useI18n();
   return (
-    <section className="px-3 pt-4 sm:px-6 sm:pt-6">
+    <section dir={dir} className="px-3 pt-4 sm:px-6 sm:pt-6">
       {/* ============ DESKTOP / TABLET ============ */}
       <div className="mx-auto hidden max-w-7xl md:block">
         <div className="relative overflow-hidden rounded-[2rem] shadow-[0_30px_80px_-40px_rgba(9,10,50,0.35)] lg:rounded-[2.5rem]">
           <img
             src={heroImg.url}
-            alt="Edio audio collection — headphones, IEMs and DAC on light-blue geometric surfaces"
+            alt="Edio audio collection"
             className="h-[560px] w-full object-cover object-center lg:h-[640px]"
             loading="eager"
             fetchPriority="high"
@@ -27,7 +27,7 @@ export function HeroCard() {
               </span>
               <span
                 className="text-edio-navy/40"
-                style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)", letterSpacing: "-0.01em" }}
+                style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)" }}
               >
                 {t("hero.sub")}
               </span>
@@ -43,7 +43,7 @@ export function HeroCard() {
               className="group inline-flex items-center gap-2 rounded-full bg-edio-navy px-6 py-3 text-sm font-medium text-edio-cream shadow-lg transition-transform hover:-translate-y-0.5"
             >
               {t("hero.cta.explore")}
-              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <FiArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
             <a
               href="#headphones"
@@ -61,18 +61,18 @@ export function HeroCard() {
           <img
             src={heroImg.url}
             alt="Edio audio collection"
-            className="h-[440px] w-full object-cover object-center"
+            className="h-[460px] w-full object-cover object-center"
             loading="eager"
             fetchPriority="high"
           />
 
-          <div className="absolute start-5 top-5 max-w-[65%]">
-            <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-edio-navy/60">
+          <div className="absolute start-5 top-5 max-w-[70%]">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-edio-navy/60">
               {t("hero.eyebrow")}
             </p>
             <h1
               className="mt-2 font-semibold text-edio-navy"
-              style={{ fontSize: "clamp(1.5rem, 6vw, 1.9rem)", lineHeight: 1.1, letterSpacing: "-0.02em" }}
+              style={{ fontSize: "clamp(1.5rem, 6vw, 1.9rem)", lineHeight: 1.1, letterSpacing: dir === "rtl" ? "0" : "-0.02em" }}
             >
               {t("hero.headline")}
             </h1>
@@ -84,7 +84,7 @@ export function HeroCard() {
               className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-medium text-edio-navy shadow-md"
             >
               {t("hero.cta.shopNow")}
-              <ArrowRight className="h-4 w-4 rtl:rotate-180" />
+              <FiArrowRight className={dir === "rtl" ? "h-4 w-4 rotate-180" : "h-4 w-4"} />
             </a>
             <a
               href="#how"
@@ -92,23 +92,6 @@ export function HeroCard() {
             >
               {t("hero.cta.details")}
             </a>
-          </div>
-        </div>
-
-        <div className="relative mt-3 overflow-hidden rounded-[1.5rem] bg-gradient-to-r from-edio-sky/70 via-white to-edio-sky/70">
-          <div className="flex items-center justify-between gap-4 p-5">
-            <div className="min-w-0">
-              <p className="text-[10px] font-medium uppercase tracking-[0.15em] text-edio-navy/60">
-                {t("hero.teaser.eyebrow")}
-              </p>
-              <h2
-                className="mt-1 truncate font-semibold text-edio-navy"
-                style={{ fontSize: "1.05rem", letterSpacing: "-0.01em" }}
-              >
-                {t("hero.teaser.title")}
-              </h2>
-            </div>
-            <ArrowRight className="h-4 w-4 shrink-0 text-edio-navy/70 rtl:rotate-180" />
           </div>
         </div>
       </div>
