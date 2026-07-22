@@ -21,8 +21,8 @@ export const dict = {
     en: "Discover hand-picked audio gear for a clearer, richer experience.",
     ar: "اكتشف أجهزة صوتية مختارة بعناية لتجربة أوضح وأغنى.",
   },
-  "hero.cta.explore": { en: "Explore", ar: "استكشف" },
-  "hero.cta.shopAudio": { en: "Shop Audio", ar: "تسوق الصوتيات" },
+  "hero.cta.explore": { en: "Shop now", ar: "تسوق الآن" },
+  "hero.cta.shopAudio": { en: "Browse categories", ar: "تصفح الفئات" },
 
   "categories.title": { en: "Shop by category", ar: "تسوق حسب الفئة" },
 
@@ -59,17 +59,9 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>("en");
 
   useEffect(() => {
-    // Keep <html dir> stable at ltr so header controls never mirror.
-    // Content shells (main/footer) opt into RTL via [dir="rtl"] on themselves.
     const el = document.documentElement;
     el.lang = lang;
-    el.dir = "ltr";
-    const main = document.querySelector("main");
-    if (main) {
-      main.classList.remove("edio-lang-swap");
-      void (main as HTMLElement).offsetWidth;
-      main.classList.add("edio-lang-swap");
-    }
+    el.dir = lang === "ar" ? "rtl" : "ltr";
   }, [lang]);
 
   const value: I18nCtx = {
