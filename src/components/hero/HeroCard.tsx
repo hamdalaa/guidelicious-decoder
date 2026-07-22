@@ -53,45 +53,74 @@ export function HeroCard() {
         </div>
       </div>
 
-      {/* Mobile — dedicated composition, sits directly on cream page bg */}
+      {/* Mobile — premium editorial composition, sits directly on cream page bg */}
       <div className="md:hidden">
-        <div className="flex flex-col gap-5 px-4 pt-5 pb-6 xs:px-5">
-          <div>
+        <div className="flex flex-col px-6 pt-6 pb-8">
+          {/* Text block — centered editorial */}
+          <div className="mb-8 text-center">
             <h1
-              className="font-semibold text-edio-navy"
-              style={{ fontSize: "clamp(2rem, 8vw, 2.6rem)", lineHeight: 1.08 }}
+              className="font-semibold tracking-tight text-edio-navy"
+              style={{ fontSize: "clamp(2rem, 9.5vw, 2.75rem)", lineHeight: 1.08 }}
             >
               {t("hero.headline")}
             </h1>
-            <p className="mt-3 max-w-[34ch] text-[15px] leading-[1.55] text-edio-navy/75 sm:text-[16px]">
+            <p className="mx-auto mt-3 max-w-[30ch] text-[16px] leading-[1.55] text-edio-navy/70">
               {t("hero.tagline")}
             </p>
           </div>
 
-          <div className="w-full">
-            <img
-              src={heroImg.url}
-              alt=""
-              className="block h-auto w-full object-contain"
-              style={{ objectPosition: "center" }}
-              loading="eager"
-              fetchPriority="high"
-            />
+          {/* Editorial product stage */}
+          <div className="relative mb-9 flex aspect-[4/5] w-full items-center justify-center">
+            {/* Architectural sky-blue blocks */}
+            <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+              <div
+                aria-hidden
+                className="h-[75%] w-[80%] rounded-2xl bg-edio-sky"
+                style={{ transform: "rotate(-6deg) translateX(1rem)" }}
+              />
+              <div
+                aria-hidden
+                className="absolute h-[60%] w-[65%] rounded-2xl bg-edio-sky/60"
+                style={{ transform: "rotate(3deg) translateX(-1.5rem)" }}
+              />
+            </div>
+            {/* Product artwork — dominant */}
+            <div
+              className="relative z-10 h-[86%] w-[88%]"
+              style={{ filter: "drop-shadow(0 24px 40px rgba(9,10,50,0.22))" }}
+            >
+              <img
+                src={heroImg.url}
+                alt=""
+                className="h-full w-full object-contain"
+                style={{ objectPosition: "center" }}
+                loading="eager"
+                fetchPriority="high"
+              />
+            </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 [@media(max-width:359px)]:grid-cols-1">
+          {/* Actions — stacked full-width */}
+          <div className="flex w-full flex-col gap-3">
             <a
               href="#shop"
-              className="inline-flex h-[46px] w-full items-center justify-center rounded-[10px] bg-edio-navy px-5 text-[14px] font-medium leading-none text-white active:opacity-95"
+              className="inline-flex h-[52px] w-full items-center justify-center rounded-[10px] bg-edio-navy px-5 text-[15px] font-semibold leading-none text-white active:opacity-95"
             >
               {t("hero.cta.explore")}
             </a>
             <a
               href="#audio"
-              className="inline-flex h-[46px] w-full items-center justify-center rounded-[10px] border-[1.5px] border-edio-navy/85 px-5 text-[14px] font-medium leading-none text-edio-navy active:opacity-95"
+              className="inline-flex h-[52px] w-full items-center justify-center rounded-[10px] border-2 border-edio-navy px-5 text-[15px] font-semibold leading-none text-edio-navy active:opacity-95"
             >
               {t("hero.cta.shopAudio")}
             </a>
+          </div>
+
+          {/* Editorial pagination indicator */}
+          <div className="mt-8 flex justify-center gap-2" aria-hidden>
+            <div className="h-1 w-8 rounded-full bg-edio-navy" />
+            <div className="h-1 w-2 rounded-full bg-edio-navy/20" />
+            <div className="h-1 w-2 rounded-full bg-edio-navy/20" />
           </div>
         </div>
       </div>
