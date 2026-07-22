@@ -46,17 +46,22 @@ export const dict = {
 
 export type TKey = keyof typeof dict;
 
+export type Currency = "USD" | "IQD";
+
 interface I18nCtx {
   lang: Lang;
   setLang: (l: Lang) => void;
   t: (key: TKey) => string;
   dir: "rtl" | "ltr";
+  currency: Currency;
+  setCurrency: (c: Currency) => void;
 }
 
 const Ctx = createContext<I18nCtx | null>(null);
 
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>("en");
+  const [currency, setCurrency] = useState<Currency>("USD");
 
   useEffect(() => {
     const el = document.documentElement;
@@ -69,6 +74,8 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     setLang: setLangState,
     t: (key) => dict[key][lang],
     dir: lang === "ar" ? "rtl" : "ltr",
+    currency,
+    setCurrency,
   };
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
@@ -79,3 +86,4 @@ export function useI18n() {
   if (!ctx) throw new Error("useI18n must be used inside I18nProvider");
   return ctx;
 }
+
