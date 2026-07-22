@@ -90,12 +90,12 @@ const CSS = `
 
 @media (hover: hover) and (pointer: fine) {
   .edio-catstrip-card:hover {
-    transform: translateY(-2px) scale(1.01);
+    transform: translateY(-2px);
     border-color: rgba(135, 203, 246, 0.75);
     background-color: #fdfeff;
     box-shadow: 0 10px 28px rgba(9, 10, 50, 0.07);
   }
-  .edio-catstrip-card:hover .edio-catstrip-img { transform: scale(1.02); }
+  .edio-catstrip-card:hover .edio-catstrip-img { transform: none; }
   .edio-catstrip-card:active {
     transform: translateY(0) scale(0.99);
     box-shadow: 0 4px 14px rgba(9, 10, 50, 0.05);
