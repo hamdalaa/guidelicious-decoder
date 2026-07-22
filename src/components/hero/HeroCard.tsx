@@ -53,74 +53,58 @@ export function HeroCard() {
         </div>
       </div>
 
-      {/* Mobile — premium editorial composition, sits directly on cream page bg */}
+      {/* Mobile — full-bleed image with overlaid copy + CTAs */}
       <div className="md:hidden">
-        <div className="flex flex-col px-6 pt-6 pb-8">
-          {/* Text block — centered editorial */}
-          <div className="mb-8 text-center">
-            <h1
-              className="font-semibold tracking-tight text-edio-navy"
-              style={{ fontSize: "clamp(2rem, 9.5vw, 2.75rem)", lineHeight: 1.08 }}
-            >
-              {t("hero.headline")}
-            </h1>
-            <p className="mx-auto mt-3 max-w-[30ch] text-[16px] leading-[1.55] text-edio-navy/70">
-              {t("hero.tagline")}
-            </p>
-          </div>
-
-          {/* Editorial product stage */}
-          <div className="relative mb-9 flex aspect-[4/5] w-full items-center justify-center">
-            {/* Architectural sky-blue blocks */}
-            <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-              <div
-                aria-hidden
-                className="h-[75%] w-[80%] rounded-2xl bg-edio-sky"
-                style={{ transform: "rotate(-6deg) translateX(1rem)" }}
-              />
-              <div
-                aria-hidden
-                className="absolute h-[60%] w-[65%] rounded-2xl bg-edio-sky/60"
-                style={{ transform: "rotate(3deg) translateX(-1.5rem)" }}
-              />
-            </div>
-            {/* Product artwork — dominant */}
+        <div className="relative overflow-hidden rounded-[22px] bg-edio-sky/30 shadow-[0_20px_60px_-30px_rgba(9,10,50,0.28)]">
+          <div className="relative aspect-[3/4] w-full">
+            <img
+              src={heroImg.url}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover"
+              style={{ objectPosition: "50% 55%" }}
+              loading="eager"
+              fetchPriority="high"
+            />
+            {/* Top scrim for headline legibility */}
             <div
-              className="relative z-10 h-[86%] w-[88%]"
-              style={{ filter: "drop-shadow(0 24px 40px rgba(9,10,50,0.22))" }}
-            >
-              <img
-                src={heroImg.url}
-                alt=""
-                className="h-full w-full object-contain"
-                style={{ objectPosition: "center" }}
-                loading="eager"
-                fetchPriority="high"
-              />
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 top-0 h-[45%] bg-gradient-to-b from-edio-cream/85 via-edio-cream/45 to-transparent"
+            />
+            {/* Bottom scrim for buttons */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-[42%] bg-gradient-to-t from-edio-navy/70 via-edio-navy/25 to-transparent"
+            />
+
+            {/* Overlay content */}
+            <div className="relative z-10 flex h-full flex-col justify-between p-6">
+              <div>
+                <h1
+                  className="font-semibold tracking-tight text-edio-navy"
+                  style={{ fontSize: "clamp(2rem, 9vw, 2.75rem)", lineHeight: 1.06 }}
+                >
+                  {t("hero.headline")}
+                </h1>
+                <p className="mt-3 max-w-[28ch] text-[15px] leading-[1.5] text-edio-navy/80">
+                  {t("hero.tagline")}
+                </p>
+              </div>
+
+              <div className="flex w-full flex-col gap-3">
+                <a
+                  href="#shop"
+                  className="inline-flex h-[50px] w-full items-center justify-center rounded-[10px] bg-edio-navy px-5 text-[15px] font-semibold leading-none text-white active:opacity-95"
+                >
+                  {t("hero.cta.explore")}
+                </a>
+                <a
+                  href="#audio"
+                  className="inline-flex h-[50px] w-full items-center justify-center rounded-[10px] border-2 border-white/90 bg-white/10 px-5 text-[15px] font-semibold leading-none text-white backdrop-blur-md active:opacity-95"
+                >
+                  {t("hero.cta.shopAudio")}
+                </a>
+              </div>
             </div>
-          </div>
-
-          {/* Actions — stacked full-width */}
-          <div className="flex w-full flex-col gap-3">
-            <a
-              href="#shop"
-              className="inline-flex h-[52px] w-full items-center justify-center rounded-[10px] bg-edio-navy px-5 text-[15px] font-semibold leading-none text-white active:opacity-95"
-            >
-              {t("hero.cta.explore")}
-            </a>
-            <a
-              href="#audio"
-              className="inline-flex h-[52px] w-full items-center justify-center rounded-[10px] border-2 border-edio-navy px-5 text-[15px] font-semibold leading-none text-edio-navy active:opacity-95"
-            >
-              {t("hero.cta.shopAudio")}
-            </a>
-          </div>
-
-          {/* Editorial pagination indicator */}
-          <div className="mt-8 flex justify-center gap-2" aria-hidden>
-            <div className="h-1 w-8 rounded-full bg-edio-navy" />
-            <div className="h-1 w-2 rounded-full bg-edio-navy/20" />
-            <div className="h-1 w-2 rounded-full bg-edio-navy/20" />
           </div>
         </div>
       </div>
