@@ -148,14 +148,19 @@ const CSS = `
 .edio-catstrip-img.is-iem         { max-width: 122px; max-height: 102px; }
 
 /* Mobile carousel */
-.edio-catstrip-carousel-wrap { display: block; }
+.edio-catstrip-carousel-wrap {
+  display: block;
+  overflow: visible;
+}
 @media (min-width: 768px) { .edio-catstrip-carousel-wrap { display: none; } }
 
 .edio-catstrip-carousel {
   display: flex;
   gap: 12px;
   overflow-x: auto;
+  overflow-y: visible;
   padding-inline: 20px;
+  padding-block: 12px 18px;
   scroll-padding-inline: 20px;
   scroll-snap-type: inline mandatory;
   overscroll-behavior-inline: contain;
