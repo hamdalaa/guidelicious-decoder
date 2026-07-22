@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 
@@ -30,32 +31,19 @@ export function LangToggle({ className }: { className?: string }) {
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label="Language"
-        className="inline-flex items-center gap-1 text-[12px] font-semibold uppercase tracking-wider text-edio-navy/50 hover:text-edio-navy/80 transition-colors bg-transparent border-0 p-1"
+        className="inline-flex items-center gap-1.5 text-[15px] font-medium leading-none text-[#232323] transition-opacity duration-150 hover:opacity-60"
       >
-        <span>{lang}</span>
-        <svg
-          width="10"
-          height="10"
-          viewBox="0 0 10 10"
-          aria-hidden
-          className={cn("transition-transform", open && "rotate-180")}
-        >
-          <path
-            d="M2 3.5 L5 6.5 L8 3.5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        <span className="uppercase">{lang}</span>
+        <ChevronDown
+          className={cn("h-4 w-4 transition-transform duration-150", open && "rotate-180")}
+          strokeWidth={1.75}
+        />
       </button>
 
       {open && (
         <div
           role="listbox"
-          className="absolute top-full mt-2 min-w-[72px] rounded-md border border-edio-navy/10 bg-edio-cream shadow-[0_8px_24px_-12px_rgba(9,10,50,0.18)] py-1 z-50 start-0"
-          style={{ fontFamily: "var(--font-en-main)" }}
+          className="absolute top-full mt-3 min-w-[80px] rounded-xl border border-[#F2F2F2] bg-white py-1 shadow-[0_8px_28px_-14px_rgba(0,0,0,0.12)] z-50 start-0"
         >
           <button
             type="button"
@@ -65,7 +53,7 @@ export function LangToggle({ className }: { className?: string }) {
               setLang(other);
               setOpen(false);
             }}
-            className="w-full text-start px-3 py-1.5 text-[12px] font-semibold uppercase tracking-wider text-edio-navy/70 hover:bg-edio-navy/5 hover:text-edio-navy transition-colors"
+            className="w-full text-start px-3 py-2 text-[14px] font-medium uppercase text-[#232323] hover:bg-[#F7F7F7] transition-colors"
           >
             {other}
           </button>
