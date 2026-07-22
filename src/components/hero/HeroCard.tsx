@@ -72,10 +72,9 @@ export function HeroCard() {
               fetchPriority="high"
             />
           </div>
-
-          </div>
         </div>
       </div>
+
     </section>
   );
 }
