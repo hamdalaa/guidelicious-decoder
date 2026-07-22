@@ -1,15 +1,31 @@
-## Hero — image only, no text
+## Goal
+Replace the current 4-tile `CategoryStrip` with a minimal 2-card MVP category section: **سماعات الرأس** and **الميكروفونات**, each with a transparent product image on the opposite side of the Arabic title.
 
-Rebuild `src/components/hero/HeroCard.tsx` so the hero card contains only the product image, matching the Luminous Labs reference (full-bleed image inside a single rounded card, no headline, eyebrow, tagline, or CTA buttons).
+## Assets
+Register both uploads as Lovable CDN assets (kept out of the repo binary):
+- `src/assets/cat-headphones.png.asset.json` ← `user-uploads://image_155.png`
+- `src/assets/cat-microphone.png.asset.json` ← `user-uploads://image_154.png`
 
-### Changes
-- `src/components/hero/HeroCard.tsx`
-  - Remove eyebrow, headline, tagline, and both CTA buttons on desktop and mobile.
-  - Keep one rounded card (`rounded-[40px]` desktop / `rounded-[28px]` mobile) with `bg-edio-sky/25`.
-  - Desktop/tablet: full-bleed `edio-hero.png` covering the whole card, min-height ~560px (desktop) / 460px (tablet), `object-cover object-center`.
-  - Mobile: same card with image filling an `aspect-[4/3]` (or similar) box, no stacked text section above it.
-  - Keep `useI18n` import only if still needed for alt text; otherwise remove. Alt stays empty (decorative) as today.
-  - No changes to i18n dictionary, header, footer, or category strip.
+## Component: `src/components/home/CategoryCards.tsx` (new)
+- RTL section, container `max-w-7xl mx-auto px-6 lg:px-10 py-16 lg:py-24`.
+- Grid: `grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8` (stack on mobile, one row on desktop).
+- Each card is an `<a href="#headphones">` / `href="#microphones">` (real category routes come later), equal size:
+  - `bg-white`, `border border-edio-sky/40`, `rounded-[28px]`, `min-h-[280px] lg:min-h-[340px]`.
+  - Two-column inner grid `grid-cols-[minmax(0,1fr)_minmax(0,1fr)]` — strict protected zones so image never overlaps title.
+  - Text zone (right in RTL): Arabic title only, TT Neoris Pro, weight 600, `text-3xl lg:text-5xl`, `text-edio-navy`, vertically centered, generous padding.
+  - Image zone (left in RTL): transparent PNG, `object-contain`, fills its half with inner padding so nothing is cropped.
+- Hover: subtle lift (`hover:-translate-y-0.5 transition`), border darkens slightly. No badges, no subtitle, no CTA text.
 
-### Out of scope
-- No new sections, no copy changes elsewhere, no font/RTL/header work.
+## Wiring
+- Remove `CategoryStrip` import + usage in `src/routes/index.tsx`, render `<CategoryCards />` instead.
+- Delete `src/components/home/CategoryStrip.tsx` (superseded).
+
+## Constraints honored
+- Only two cards, titles only — no promo copy, subtitles, badges, or "more details".
+- RTL layout via `dir="rtl"` on the section; logical padding.
+- Palette limited to cream/white/soft-blue/navy tokens already in `src/styles.css`.
+- Uses the locally registered TT Neoris Pro (no Google/CDN fonts added).
+- Fully responsive: 2-up desktop, stacked mobile, image and title never collide.
+
+## Out of scope
+Real category routes/data, hover animations beyond a subtle lift, additional categories.
