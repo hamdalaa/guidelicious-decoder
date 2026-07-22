@@ -3,11 +3,29 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 
-export function LangToggle({ className }: { className?: string }) {
+interface Props {
+  className?: string;
+  direction?: "down" | "up";
+}
+
+export function LangToggle({ className, direction = "down" }: Props) {
   const { lang, setLang } = useI18n();
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const other = lang === "en" ? "ar" : "en";
+
+  useEffect(() => {
+    if (open) {
+      setMounted(true);
+      const r = requestAnimationFrame(() => setVisible(true));
+      return () => cancelAnimationFrame(r);
+    }
+    setVisible(false);
+    const t = window.setTimeout(() => setMounted(false), 170);
+    return () => window.clearTimeout(t);
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -23,6 +41,9 @@ export function LangToggle({ className }: { className?: string }) {
     };
   }, [open]);
 
+  const isUp = direction === "up";
+  const closedTransform = isUp ? "translateY(6px)" : "translateY(-6px)";
+
   return (
     <div ref={ref} className={cn("relative inline-block", className)}>
       <button
@@ -31,7 +52,7 @@ export function LangToggle({ className }: { className?: string }) {
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label="Language"
-        className="inline-flex items-center gap-1.5 text-[15px] font-medium leading-none text-[#232323] transition-opacity duration-150 hover:opacity-60"
+        className="inline-flex w-full items-center justify-center gap-1.5 text-[15px] font-medium leading-none tracking-normal text-[#232323] transition-opacity duration-150 hover:opacity-60"
       >
         <span className="uppercase">{lang}</span>
         <ChevronDown
@@ -40,10 +61,18 @@ export function LangToggle({ className }: { className?: string }) {
         />
       </button>
 
-      {open && (
+      {mounted && (
         <div
           role="listbox"
-          className="absolute top-full mt-3 min-w-[80px] rounded-xl border border-[#F2F2F2] bg-white py-1 shadow-[0_8px_28px_-14px_rgba(0,0,0,0.12)] z-50 start-0"
+          style={{
+            [isUp ? "bottom" : "top"]: "100%",
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : closedTransform,
+            transitionProperty: "opacity, transform",
+            transitionDuration: "170ms",
+            transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
+          }}
+          className="absolute inset-x-0 z-50 pt-1"
         >
           <button
             type="button"
@@ -53,7 +82,7 @@ export function LangToggle({ className }: { className?: string }) {
               setLang(other);
               setOpen(false);
             }}
-            className="w-full text-start px-3 py-2 text-[14px] font-medium uppercase text-[#232323] hover:bg-[#F7F7F7] transition-colors"
+            className="flex w-full items-center justify-center rounded-[6px] py-1.5 text-[15px] font-medium uppercase leading-none tracking-normal text-[#232323] transition-colors duration-150 hover:bg-[#F5F5F5]"
           >
             {other}
           </button>

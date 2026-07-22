@@ -179,7 +179,7 @@ export function Header() {
 
           <div className="border-t border-[#F2F2F2] px-6 py-5 space-y-4">
             <div className="flex items-center justify-between">
-              <LangToggle />
+              <LangToggle direction="up" />
               <CurrencyToggle direction="up" />
             </div>
             <div className="flex items-center gap-2">
