@@ -70,11 +70,9 @@ const CSS = `
   text-decoration: none;
   box-sizing: border-box;
   transform: translateY(0);
-  box-shadow: none;
   outline: none;
   transition:
     transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    box-shadow 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
     border-color 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -82,11 +80,9 @@ const CSS = `
   .edio-catstrip-card:hover {
     transform: translateY(-2px);
     border-color: rgba(15, 35, 65, 0.22);
-    box-shadow: 0 8px 24px rgba(15, 35, 65, 0.06);
   }
   .edio-catstrip-card:active {
     transform: translateY(0);
-    box-shadow: 0 4px 14px rgba(15, 35, 65, 0.05);
     transition-duration: 120ms;
   }
 }
@@ -95,14 +91,12 @@ const CSS = `
   .edio-catstrip-card:active {
     transform: none;
     border-color: rgba(15, 35, 65, 0.14);
-    box-shadow: none;
   }
 }
 .edio-catstrip-card:focus { outline: none; }
 .edio-catstrip-card:focus-visible {
   outline: 2px solid rgba(80, 160, 220, 0.55);
   outline-offset: 3px;
-  box-shadow: none;
 }
 .edio-catstrip-card:focus:not(:focus-visible) { outline: none; }
 
