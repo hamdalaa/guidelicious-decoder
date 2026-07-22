@@ -77,7 +77,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   /* Edio typography tokens — Neoris only for both languages */
-  --font-en-main: "TT Neoris Pro", system-ui, sans-serif;
+  --font-en-main: "Geist", system-ui, sans-serif;
   --font-ar-main: "TT Neoris Pro", system-ui, sans-serif;
   --font-sans: var(--font-en-main);
   --font-display: var(--font-en-main);
