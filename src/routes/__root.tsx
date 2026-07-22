@@ -79,12 +79,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Edio — Sound, guided." },
-      { name: "description", content: "Edio helps you choose the right audio gear — no noise, no pressure." },
+      { name: "description", content: "Edio helps you choose the right audio gear — headphones, speakers, microphones, and audio equipment — with calm, expert guidance." },
       { name: "author", content: "Edio" },
       { property: "og:title", content: "Edio — Sound, guided." },
-      { property: "og:description", content: "Edio helps you choose the right audio gear — no noise, no pressure." },
+      { property: "og:description", content: "Edio helps you choose the right audio gear — headphones, speakers, microphones, and audio equipment — with calm, expert guidance." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Edio — Sound, guided." },
+      { name: "twitter:description", content: "Edio helps you choose the right audio gear — headphones, speakers, microphones, and audio equipment — with calm, expert guidance." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/95963f9c-4bea-4d1e-80c7-14fcb586e5c8/id-preview-a8d30a00--c4254739-5f90-4ad3-b292-30b85c42fe72.lovable.app-1784684205489.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/95963f9c-4bea-4d1e-80c7-14fcb586e5c8/id-preview-a8d30a00--c4254739-5f90-4ad3-b292-30b85c42fe72.lovable.app-1784684205489.png" },
     ],
 
     links: [

@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Find the sound that fits you. Curated headphones, speakers, microphones and audio equipment.",
+          "Edio helps you choose the right audio gear — headphones, speakers, microphones, and audio equipment — with calm, expert guidance.",
       },
     ],
   }),
