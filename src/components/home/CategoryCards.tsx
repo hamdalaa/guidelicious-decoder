@@ -6,6 +6,7 @@ type Card = {
   href: string;
   image: string;
   alt: string;
+  alignTop?: boolean;
 };
 
 const CARDS: Card[] = [
@@ -20,6 +21,7 @@ const CARDS: Card[] = [
     href: "#microphones",
     image: microphoneAsset.url,
     alt: "",
+    alignTop: true,
   },
 ];
 
@@ -45,11 +47,22 @@ export function CategoryCards() {
                 </h3>
               </div>
               {/* Image zone (left in RTL) */}
-              <div className="relative flex h-full items-center justify-center px-4 py-4 lg:px-6">
+              <div
+                className={
+                  card.alignTop
+                    ? "relative flex h-full items-start justify-center overflow-hidden px-4 pt-1 lg:px-6 lg:pt-1.5"
+                    : "relative flex h-full items-center justify-center px-4 py-4 lg:px-6"
+                }
+              >
                 <img
                   src={card.image}
                   alt={card.alt}
-                  className="max-h-[140px] w-auto max-w-full object-contain transition-transform duration-500 ease-out group-hover:-translate-y-0.5 group-hover:scale-[1.02] lg:max-h-[160px]"
+                  style={card.alignTop ? { objectPosition: "top" } : undefined}
+                  className={
+                    card.alignTop
+                      ? "block w-auto max-w-full self-start object-contain max-h-[170px] lg:max-h-[190px] transition-transform duration-500 ease-out group-hover:-translate-y-0.5 group-hover:scale-[1.02]"
+                      : "max-h-[140px] w-auto max-w-full object-contain transition-transform duration-500 ease-out group-hover:-translate-y-0.5 group-hover:scale-[1.02] lg:max-h-[160px]"
+                  }
                   loading="lazy"
                 />
               </div>
@@ -60,3 +73,4 @@ export function CategoryCards() {
     </section>
   );
 }
+
