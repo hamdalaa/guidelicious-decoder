@@ -94,7 +94,11 @@ export function Header() {
   return (
     <header
       ref={headerRef}
-      className="sticky top-0 z-40 bg-edio-cream/85 backdrop-blur-md supports-[backdrop-filter]:bg-edio-cream/70"
+      className={cn(
+        "sticky top-0 z-40 bg-transparent will-change-transform",
+        "transition-transform duration-200 ease-out motion-reduce:transition-none",
+        hidden ? "-translate-y-full" : "translate-y-0",
+      )}
     >
       {/* Desktop */}
       <div className="mx-auto hidden h-[92px] max-w-[1440px] items-center gap-6 px-8 lg:flex xl:px-12">
