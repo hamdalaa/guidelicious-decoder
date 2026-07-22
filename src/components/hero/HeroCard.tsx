@@ -59,15 +59,15 @@ export function HeroCard() {
           <img
             src={heroImg.url}
             alt=""
-            className="absolute inset-0 h-full w-full object-cover object-[60%_35%]"
+            className="absolute inset-0 h-full w-full object-cover object-[55%_78%]"
             loading="eager"
             fetchPriority="high"
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-[62%] bg-gradient-to-t from-edio-cream/95 via-edio-cream/70 to-transparent"
+            className="pointer-events-none absolute inset-x-0 top-0 h-[58%] bg-gradient-to-b from-edio-cream/95 via-edio-cream/70 to-transparent"
           />
-          <div className="absolute inset-x-0 bottom-0 z-10 px-6 pb-7 pt-10">
+          <div className="absolute inset-x-0 top-0 z-10 px-6 pb-10 pt-7">
             <p className="text-[11px] font-semibold tracking-[0.22em] text-edio-navy/70">
               {t("hero.eyebrow")}
             </p>
@@ -77,23 +77,24 @@ export function HeroCard() {
             <p className={`mt-3 text-[14px] leading-[1.5] text-edio-navy/75 ${isAr ? "text-start" : ""}`}>
               {t("hero.tagline")}
             </p>
-            <div className="mt-5 flex flex-col gap-2.5">
-              <a
-                href="#shop"
-                className="inline-flex h-[44px] w-full items-center justify-center rounded-full bg-edio-navy px-6 text-[14px] font-medium leading-none text-white"
-              >
-                {t("hero.cta.explore")}
-              </a>
-              <a
-                href="#audio"
-                className="inline-flex h-[44px] w-full items-center justify-center rounded-full border-[1.5px] border-edio-navy/85 px-6 text-[14px] font-medium leading-none text-edio-navy"
-              >
-                {t("hero.cta.shopAudio")}
-              </a>
-            </div>
+          </div>
+          <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col gap-2.5 px-6 pb-6">
+            <a
+              href="#shop"
+              className="inline-flex h-[44px] w-full items-center justify-center rounded-full bg-edio-navy px-6 text-[14px] font-medium leading-none text-white"
+            >
+              {t("hero.cta.explore")}
+            </a>
+            <a
+              href="#audio"
+              className="inline-flex h-[44px] w-full items-center justify-center rounded-full border-[1.5px] border-edio-navy/85 bg-edio-cream/70 px-6 text-[14px] font-medium leading-none text-edio-navy backdrop-blur-[2px]"
+            >
+              {t("hero.cta.shopAudio")}
+            </a>
           </div>
         </div>
       </div>
+
     </section>
   );
 }
