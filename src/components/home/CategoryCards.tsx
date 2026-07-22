@@ -1,5 +1,8 @@
 import headphonesAsset from "@/assets/cat-headphones.png.asset.json";
 import microphoneAsset from "@/assets/cat-microphone.png.asset.json";
+import iemAsset from "@/assets/cat-iem.png.asset.json";
+import micAtAsset from "@/assets/cat-mic-at.png.asset.json";
+
 
 type Card = {
   title: string;
@@ -23,7 +26,21 @@ const CARDS: Card[] = [
     alt: "",
     alignTop: true,
   },
+  {
+    title: "سماعات داخل الأذن",
+    href: "#iem",
+    image: iemAsset.url,
+    alt: "",
+  },
+  {
+    title: "مايكات",
+    href: "#mics",
+    image: micAtAsset.url,
+    alt: "",
+    alignTop: true,
+  },
 ];
+
 
 export function CategoryCards() {
   return (
