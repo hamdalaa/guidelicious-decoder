@@ -25,7 +25,7 @@ const CSS = `
   width: 100%;
   max-width: 1440px;
   margin-inline: auto;
-  padding-inline: 24px;
+  padding-inline: 20px;
   padding-block: 36px;
   box-sizing: border-box;
   overflow: visible;
