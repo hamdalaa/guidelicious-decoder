@@ -57,48 +57,35 @@ const CSS = `
 /* Card */
 .edio-catstrip-card {
   display: grid;
-  grid-template-columns: 44% minmax(0, 56%);
+  grid-template-columns: minmax(0, 40%) minmax(0, 60%);
   align-items: center;
   gap: 14px;
-  height: 144px;
-  min-height: 144px;
-  max-height: 144px;
-  padding-inline: 20px;
-  padding-block: 16px;
+  min-height: 148px;
+  padding-inline: 18px;
+  padding-block: 14px;
   background: #ffffff;
   border: 1px solid rgba(15, 35, 65, 0.14);
-  border-radius: 22px;
+  border-radius: 18px;
   overflow: hidden;
   text-decoration: none;
   box-sizing: border-box;
-  transform: translateY(0) scale(1);
-  transform-origin: center;
+  transform: translateY(0);
   box-shadow: none;
   outline: none;
   transition:
     transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
     box-shadow 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    border-color 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    background-color 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-@media (min-width: 768px) and (max-width: 1199px) {
-  .edio-catstrip-card { height: 140px; min-height: 140px; max-height: 140px; }
-}
-
-.edio-catstrip-img {
-  transition: transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    border-color 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .edio-catstrip-card:hover {
     transform: translateY(-2px);
-    border-color: rgba(15, 35, 65, 0.24);
-    background-color: #ffffff;
+    border-color: rgba(15, 35, 65, 0.22);
     box-shadow: 0 8px 24px rgba(15, 35, 65, 0.06);
   }
-  .edio-catstrip-card:hover .edio-catstrip-img { transform: none; }
   .edio-catstrip-card:active {
-    transform: translateY(0) scale(0.99);
+    transform: translateY(0);
     box-shadow: 0 4px 14px rgba(15, 35, 65, 0.05);
     transition-duration: 120ms;
   }
@@ -106,12 +93,10 @@ const CSS = `
 @media (hover: none), (pointer: coarse) {
   .edio-catstrip-card:hover,
   .edio-catstrip-card:active {
-    transform: translateY(0) scale(1);
+    transform: none;
     border-color: rgba(15, 35, 65, 0.14);
     box-shadow: none;
   }
-  .edio-catstrip-card:hover .edio-catstrip-img,
-  .edio-catstrip-card:active .edio-catstrip-img { transform: none; }
 }
 .edio-catstrip-card:focus { outline: none; }
 .edio-catstrip-card:focus-visible {
@@ -121,11 +106,11 @@ const CSS = `
 }
 .edio-catstrip-card:focus:not(:focus-visible) { outline: none; }
 
-
 /* Text */
 .edio-catstrip-textcell {
   min-width: 0;
-  padding-inline: 4px;
+  width: 100%;
+  padding-inline: 2px;
   display: flex;
   align-items: center;
 }
@@ -137,18 +122,16 @@ const CSS = `
   font-synthesis-weight: none;
   line-height: 1.35;
   text-align: start;
-  font-size: clamp(16px, 1.05vw, 19px);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: clamp(0.95rem, 1.15vw, 1.2rem);
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
   word-break: normal;
   overflow-wrap: normal;
   hyphens: none;
 }
-/* mobile carousel allows wrap */
-.edio-catstrip-title.is-nowrap { white-space: nowrap; }
 
-/* Image cell — fills full card height so anchoring hits the outer border */
+/* Image cell */
 .edio-catstrip-imgcell {
   width: 100%;
   align-self: stretch;
@@ -168,32 +151,28 @@ const CSS = `
   height: auto;
   max-height: 100%;
   object-fit: contain;
-  transform-origin: center;
-  will-change: transform;
 }
 
-/* Per-variant sizes + edge-connect offsets (card padding-block is 16px, so -16px reaches border) */
 .edio-catstrip-img.is-mic-hanging {
-  max-width: 155px; max-height: 130px;
-  object-position: center top;
-  margin-block-start: -16px;
-}
-.edio-catstrip-img.is-headphones {
-  max-width: 122px; max-height: 122px;
+  max-width: 130px; max-height: 118px;
   object-position: center top;
   margin-block-start: -14px;
 }
-.edio-catstrip-img.is-mic-standing {
-  max-width: 82px; max-height: 132px;
-  object-position: center bottom;
-  margin-block-end: -16px;
+.edio-catstrip-img.is-headphones {
+  max-width: 112px; max-height: 112px;
+  object-position: center top;
+  margin-block-start: -12px;
 }
-.edio-catstrip-img.is-iem {
-  max-width: 130px; max-height: 122px;
+.edio-catstrip-img.is-mic-standing {
+  max-width: 74px; max-height: 122px;
   object-position: center bottom;
   margin-block-end: -14px;
 }
-
+.edio-catstrip-img.is-iem {
+  max-width: 118px; max-height: 112px;
+  object-position: center bottom;
+  margin-block-end: -12px;
+}
 
 /* Mobile carousel */
 .edio-catstrip-carousel-wrap {
@@ -213,40 +192,33 @@ const CSS = `
   scroll-snap-type: inline mandatory;
   overscroll-behavior-inline: contain;
   scrollbar-width: none;
-  /* cancel section padding so carousel spans full viewport */
-  margin-inline: -24px;
+  margin-inline: -20px;
 }
 .edio-catstrip-carousel::-webkit-scrollbar { display: none; }
 
 .edio-catstrip-slide {
-  flex: 0 0 calc(100vw - 64px);
-  width: calc(100vw - 64px);
+  flex: 0 0 84%;
   max-width: 360px;
   scroll-snap-align: start;
 }
 .edio-catstrip-slide .edio-catstrip-card {
-  height: 156px;
-  min-height: 156px;
-  max-height: 156px;
-  grid-template-columns: 46% minmax(0, 54%);
+  min-height: 160px;
+  grid-template-columns: minmax(0, 42%) minmax(0, 58%);
   gap: 10px;
   padding-inline: 16px;
   padding-block: 14px;
 }
-.edio-catstrip-slide .edio-catstrip-title { font-size: 19px; white-space: normal; }
-.edio-catstrip-slide .edio-catstrip-imgcell { height: 124px; }
-.edio-catstrip-slide .edio-catstrip-img.is-mic-hanging  { max-width: 148px; max-height: 128px; margin-block-start: -12px; }
-.edio-catstrip-slide .edio-catstrip-img.is-headphones   { max-width: 124px; max-height: 118px; margin-block-start: -4px; }
-.edio-catstrip-slide .edio-catstrip-img.is-mic-standing { max-width: 82px;  max-height: 128px; margin-block-end: -8px; }
-.edio-catstrip-slide .edio-catstrip-img.is-iem          { max-width: 132px; max-height: 118px; margin-block-end: -8px; }
+.edio-catstrip-slide .edio-catstrip-title { font-size: 1.05rem; }
+.edio-catstrip-slide .edio-catstrip-img.is-mic-hanging  { max-width: 132px; max-height: 122px; margin-block-start: -12px; }
+.edio-catstrip-slide .edio-catstrip-img.is-headphones   { max-width: 118px; max-height: 116px; margin-block-start: -8px; }
+.edio-catstrip-slide .edio-catstrip-img.is-mic-standing { max-width: 78px;  max-height: 126px; margin-block-end: -10px; }
+.edio-catstrip-slide .edio-catstrip-img.is-iem          { max-width: 124px; max-height: 116px; margin-block-end: -8px; }
 
 @media (prefers-reduced-motion: reduce) {
   .edio-catstrip-card,
   .edio-catstrip-card:hover,
-  .edio-catstrip-card:active,
-  .edio-catstrip-img,
-  .edio-catstrip-card:hover .edio-catstrip-img {
-    transition: background-color 200ms ease, border-color 200ms ease;
+  .edio-catstrip-card:active {
+    transition: border-color 200ms ease;
     transform: none;
   }
 }
@@ -261,12 +233,11 @@ const ANCHOR: Record<Variant, "top" | "bottom" | "center"> = {
 };
 
 function Card({ card }: { card: Card }) {
-  const isHangingMic = card.variant === "mic-hanging";
   const anchor = ANCHOR[card.variant];
   return (
     <a href={card.href} className="edio-catstrip-card" aria-label={card.title}>
       <div className="edio-catstrip-textcell">
-        <h3 className={`edio-catstrip-title${isHangingMic ? " is-nowrap" : ""}`}>{card.title}</h3>
+        <h3 className="edio-catstrip-title">{card.title}</h3>
       </div>
       <div className={`edio-catstrip-imgcell is-anchor-${anchor}`}>
         <img
