@@ -239,11 +239,6 @@ function Card({ card }: { card: Card }) {
       <div className="edio-catstrip-textcell">
         <h3 className="edio-catstrip-title">{card.title}</h3>
       </div>
-  return (
-    <a href={card.href} className="edio-catstrip-card" aria-label={card.title}>
-      <div className="edio-catstrip-textcell">
-        <h3 className={`edio-catstrip-title${isHangingMic ? " is-nowrap" : ""}`}>{card.title}</h3>
-      </div>
       <div className={`edio-catstrip-imgcell is-anchor-${anchor}`}>
         <img
           src={card.image}
