@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { FiSearch, FiUser, FiShoppingBag, FiMenu, FiX } from "react-icons/fi";
+import { Search, User, ShoppingBag, Menu, X } from "lucide-react";
 import { EdioLogo } from "@/components/EdioLogo";
 import { LangToggle } from "./LangToggle";
 import { CurrencyToggle } from "./CurrencyToggle";
@@ -17,6 +17,9 @@ const NAV: { key: TKey; href: string }[] = [
   { key: "nav.brands", href: "#brands" },
 ];
 
+const ICON_BTN =
+  "grid h-11 w-11 place-items-center rounded-full text-[#232323] transition-opacity duration-150 hover:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#232323]/20";
+
 export function Header() {
   const { t } = useI18n();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,18 +34,21 @@ export function Header() {
   }, [menuOpen]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-edio-navy/5 bg-edio-cream/90 backdrop-blur-md">
-      <div className="mx-auto grid h-[72px] max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-4 px-5 sm:px-8 lg:h-[88px]">
+    <header className="sticky top-0 z-40 border-b border-[#F2F2F2] bg-white">
+      {/* Desktop */}
+      <div className="mx-auto hidden h-[92px] max-w-[1440px] grid-cols-[auto_1fr_auto] items-center gap-10 px-10 lg:grid xl:px-14">
         <Link to="/" aria-label="Edio home" className="shrink-0">
           <EdioLogo size="sm" pill={false} />
         </Link>
 
-        {/* Center nav — desktop only */}
-        <nav className="hidden justify-center lg:flex">
-          <ul className="flex items-center gap-7 text-[13px] font-medium text-edio-navy/75">
+        <nav className="flex justify-center">
+          <ul className="flex items-center gap-11 xl:gap-12 text-[15px] font-medium leading-none text-[#232323]">
             {NAV.map((item) => (
               <li key={item.key}>
-                <a href={item.href} className="transition-colors hover:text-edio-navy">
+                <a
+                  href={item.href}
+                  className="transition-opacity duration-150 hover:opacity-60"
+                >
                   {t(item.key)}
                 </a>
               </li>
@@ -50,7 +56,7 @@ export function Header() {
             <li>
               <a
                 href="#shop"
-                className="inline-flex items-center rounded-full border border-edio-navy/25 px-5 py-2 text-[13px] font-semibold text-edio-navy transition-colors hover:border-edio-navy hover:bg-edio-navy hover:text-edio-cream"
+                className="inline-flex h-[46px] items-center rounded-full border-[1.5px] border-[#232323] px-7 text-[15px] font-medium leading-none text-[#232323] transition-colors duration-200 hover:bg-[#232323] hover:text-white"
               >
                 {t("nav.shop")}
               </a>
@@ -58,53 +64,59 @@ export function Header() {
           </ul>
         </nav>
 
-        {/* Utilities */}
-        <div className="flex items-center justify-end gap-2 lg:gap-3">
-          {/* Desktop-only utilities */}
-          <div className="hidden lg:block">
-            <LangToggle />
+        <div className="flex items-center gap-[22px]">
+          <LangToggle />
+          <CurrencyToggle />
+          <div className="flex items-center gap-[10px]">
+            <button type="button" aria-label="Search" className={ICON_BTN}>
+              <Search className="h-[22px] w-[22px]" strokeWidth={1.75} />
+            </button>
+            <button type="button" aria-label="Account" className={ICON_BTN}>
+              <User className="h-[22px] w-[22px]" strokeWidth={1.75} />
+            </button>
+            <button
+              type="button"
+              aria-label={t("nav.cart")}
+              className={cn(ICON_BTN, "relative")}
+            >
+              <ShoppingBag className="h-[22px] w-[22px]" strokeWidth={1.75} />
+              {CART_COUNT > 0 && (
+                <span className="absolute top-1.5 end-1.5 grid h-[18px] min-w-[18px] place-items-center rounded-full bg-[#232323] px-1 text-[10px] font-semibold leading-none text-white">
+                  {CART_COUNT}
+                </span>
+              )}
+            </button>
           </div>
-          <div className="hidden lg:block">
-            <CurrencyToggle />
-          </div>
-          <button
-            type="button"
-            aria-label="Search"
-            className="hidden h-9 w-9 place-items-center rounded-full text-edio-navy transition-colors hover:bg-edio-navy/5 lg:grid"
-          >
-            <FiSearch className="h-5 w-5" strokeWidth={1.75} />
-          </button>
-          <button
-            type="button"
-            aria-label="Account"
-            className="hidden h-9 w-9 place-items-center rounded-full text-edio-navy transition-colors hover:bg-edio-navy/5 lg:grid"
-          >
-            <FiUser className="h-5 w-5" strokeWidth={1.75} />
-          </button>
-
-          {/* Always visible */}
-          <button
-            type="button"
-            aria-label={t("nav.cart")}
-            className="relative grid h-9 w-9 place-items-center rounded-full text-edio-navy transition-colors hover:bg-edio-navy/5"
-          >
-            <FiShoppingBag className="h-5 w-5" strokeWidth={1.75} />
-            {CART_COUNT > 0 && (
-              <span className="absolute -top-0.5 -end-0.5 grid h-4 min-w-4 place-items-center rounded-full bg-edio-navy px-1 text-[10px] font-semibold text-edio-cream">
-                {CART_COUNT}
-              </span>
-            )}
-          </button>
-
-          <button
-            type="button"
-            aria-label={t("nav.menu")}
-            onClick={() => setMenuOpen(true)}
-            className="grid h-9 w-9 place-items-center rounded-full text-edio-navy transition-colors hover:bg-edio-navy/5 lg:hidden"
-          >
-            <FiMenu className="h-5 w-5" strokeWidth={1.75} />
-          </button>
         </div>
+      </div>
+
+      {/* Mobile */}
+      <div className="mx-auto grid h-[68px] grid-cols-[auto_1fr_auto] items-center gap-3 px-5 lg:hidden">
+        <button
+          type="button"
+          aria-label={t("nav.menu")}
+          onClick={() => setMenuOpen(true)}
+          className={ICON_BTN}
+        >
+          <Menu className="h-[22px] w-[22px]" strokeWidth={1.75} />
+        </button>
+        <div className="flex justify-center">
+          <Link to="/" aria-label="Edio home">
+            <EdioLogo size="sm" pill={false} />
+          </Link>
+        </div>
+        <button
+          type="button"
+          aria-label={t("nav.cart")}
+          className={cn(ICON_BTN, "relative")}
+        >
+          <ShoppingBag className="h-[22px] w-[22px]" strokeWidth={1.75} />
+          {CART_COUNT > 0 && (
+            <span className="absolute top-1.5 end-1.5 grid h-[18px] min-w-[18px] place-items-center rounded-full bg-[#232323] px-1 text-[10px] font-semibold leading-none text-white">
+              {CART_COUNT}
+            </span>
+          )}
+        </button>
       </div>
 
       {/* Mobile drawer */}
@@ -117,37 +129,39 @@ export function Header() {
       >
         <div
           className={cn(
-            "absolute inset-0 bg-edio-navy/40 transition-opacity",
+            "absolute inset-0 bg-black/30 transition-opacity duration-200",
             menuOpen ? "opacity-100" : "opacity-0",
           )}
           onClick={() => setMenuOpen(false)}
         />
         <aside
           className={cn(
-            "absolute inset-y-0 end-0 flex h-full w-[88%] max-w-sm flex-col bg-edio-cream shadow-2xl transition-transform duration-300",
-            menuOpen ? "translate-x-0" : "rtl:-translate-x-full ltr:translate-x-full",
+            "absolute inset-y-0 start-0 flex h-full w-[86%] max-w-[380px] flex-col bg-white shadow-2xl transition-transform duration-200 ease-out",
+            menuOpen
+              ? "translate-x-0"
+              : "ltr:-translate-x-full rtl:translate-x-full",
           )}
         >
-          <div className="flex items-center justify-between px-6 pt-5">
+          <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-[#F2F2F2]">
             <EdioLogo size="sm" pill={false} />
             <button
               type="button"
               aria-label={t("nav.close")}
               onClick={() => setMenuOpen(false)}
-              className="grid h-9 w-9 place-items-center rounded-full text-edio-navy hover:bg-edio-navy/5"
+              className={ICON_BTN}
             >
-              <FiX className="h-5 w-5" strokeWidth={1.75} />
+              <X className="h-[22px] w-[22px]" strokeWidth={1.75} />
             </button>
           </div>
 
-          <nav className="flex-1 overflow-y-auto px-6 pt-8">
+          <nav className="flex-1 overflow-y-auto px-6 py-6">
             <ul className="space-y-1">
               {NAV.map((item) => (
                 <li key={item.key}>
                   <a
                     href={item.href}
                     onClick={() => setMenuOpen(false)}
-                    className="block rounded-xl py-3 text-[17px] font-medium text-edio-navy hover:bg-edio-navy/5"
+                    className="flex min-h-[52px] items-center rounded-lg text-[18px] font-medium text-[#232323] transition-opacity hover:opacity-60"
                   >
                     {t(item.key)}
                   </a>
@@ -157,31 +171,23 @@ export function Header() {
             <a
               href="#shop"
               onClick={() => setMenuOpen(false)}
-              className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-edio-navy px-5 py-3 text-sm font-semibold text-edio-cream"
+              className="mt-6 inline-flex h-[52px] w-full items-center justify-center rounded-full border-[1.5px] border-[#232323] text-[15px] font-medium text-[#232323] transition-colors duration-200 hover:bg-[#232323] hover:text-white"
             >
               {t("nav.shop")}
             </a>
           </nav>
 
-          <div className="border-t border-edio-navy/10 px-6 py-5">
+          <div className="border-t border-[#F2F2F2] px-6 py-5 space-y-4">
             <div className="flex items-center justify-between">
               <LangToggle />
               <CurrencyToggle />
             </div>
-            <div className="mt-4 flex items-center gap-3 text-edio-navy/70">
-              <button
-                type="button"
-                aria-label="Search"
-                className="grid h-9 w-9 place-items-center rounded-full hover:bg-edio-navy/5"
-              >
-                <FiSearch className="h-5 w-5" strokeWidth={1.75} />
+            <div className="flex items-center gap-2">
+              <button type="button" aria-label="Search" className={ICON_BTN}>
+                <Search className="h-[22px] w-[22px]" strokeWidth={1.75} />
               </button>
-              <button
-                type="button"
-                aria-label="Account"
-                className="grid h-9 w-9 place-items-center rounded-full hover:bg-edio-navy/5"
-              >
-                <FiUser className="h-5 w-5" strokeWidth={1.75} />
+              <button type="button" aria-label="Account" className={ICON_BTN}>
+                <User className="h-[22px] w-[22px]" strokeWidth={1.75} />
               </button>
             </div>
           </div>
