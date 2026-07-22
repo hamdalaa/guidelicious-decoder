@@ -85,7 +85,7 @@
 
   /* Edio typography tokens — provided fonts only */
   --font-en-main: "Geist", system-ui, sans-serif;
-  --font-ar-main: "TT Neoris Pro", "TT Neoris Pro Fallback", system-ui, sans-serif;
+  --font-ar-main: "TT Neoris Pro Fallback", "TT Neoris Pro", system-ui, sans-serif;
   --font-sans: var(--font-en-main);
   --font-display: var(--font-en-main);
 
