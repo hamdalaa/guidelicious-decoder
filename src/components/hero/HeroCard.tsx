@@ -61,19 +61,20 @@ export function HeroCard() {
 
       {/* Mobile — full-bleed image with overlaid copy + CTAs */}
       <div className="md:hidden">
-        <div className="relative overflow-hidden rounded-[22px] bg-edio-sky/30 shadow-[0_20px_60px_-30px_rgba(9,10,50,0.28)]">
+        <div className="relative overflow-hidden rounded-[22px] bg-edio-sky/30">
           <div className="relative aspect-[3/4] w-full">
             <img
               src={heroImg.url}
               alt=""
-              className="absolute inset-0 h-full w-full object-cover"
-              style={{ objectPosition: "50% 55%" }}
+              className="absolute inset-0 h-full w-full object-contain"
+              style={{ objectPosition: "50% 50%" }}
               loading="eager"
               fetchPriority="high"
             />
           </div>
         </div>
       </div>
+
 
     </section>
   );
