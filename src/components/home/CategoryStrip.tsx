@@ -125,27 +125,49 @@ const CSS = `
   font-size: clamp(18px, 1.15vw, 20px);
 }
 
-/* Image */
+/* Image cell — anchor per-variant */
 .edio-catstrip-imgcell {
   width: 100%;
   height: 112px;
   display: flex;
-  align-items: center;
   justify-content: center;
   overflow: hidden;
+  position: relative;
 }
+.edio-catstrip-imgcell.is-anchor-top    { align-items: flex-start; }
+.edio-catstrip-imgcell.is-anchor-bottom { align-items: flex-end; }
+.edio-catstrip-imgcell.is-anchor-center { align-items: center; }
+
 .edio-catstrip-img {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-height: 100%;
   object-fit: contain;
-  object-position: center;
   transition: transform 200ms ease;
+  will-change: transform;
 }
-.edio-catstrip-img.is-mic-hanging { max-width: 155px; max-height: 105px; }
-.edio-catstrip-img.is-headphones  { max-width: 112px; max-height: 105px; }
-.edio-catstrip-img.is-mic-standing{ max-width: 76px;  max-height: 112px; }
-.edio-catstrip-img.is-iem         { max-width: 122px; max-height: 102px; }
+/* Per-variant sizes + edge-connect offsets to strip transparent PNG padding */
+.edio-catstrip-img.is-mic-hanging {
+  max-width: 155px; max-height: 118px;
+  object-position: center top;
+  margin-block-start: -10px; /* stand enters from top edge */
+}
+.edio-catstrip-img.is-headphones {
+  max-width: 118px; max-height: 110px;
+  object-position: center top;
+  margin-block-start: -4px;
+}
+.edio-catstrip-img.is-mic-standing {
+  max-width: 78px; max-height: 118px;
+  object-position: center bottom;
+  margin-block-end: -6px; /* base rests on bottom edge */
+}
+.edio-catstrip-img.is-iem {
+  max-width: 126px; max-height: 110px;
+  object-position: center bottom;
+  margin-block-end: -6px; /* cables trail to bottom */
+}
 
 /* Mobile carousel */
 .edio-catstrip-carousel-wrap {
@@ -186,22 +208,33 @@ const CSS = `
   padding-block: 14px;
 }
 .edio-catstrip-slide .edio-catstrip-title { font-size: 19px; white-space: normal; }
-.edio-catstrip-slide .edio-catstrip-imgcell { height: 118px; }
-.edio-catstrip-slide .edio-catstrip-img.is-mic-hanging { max-width: 140px; max-height: 100px; }
+.edio-catstrip-slide .edio-catstrip-imgcell { height: 124px; }
+.edio-catstrip-slide .edio-catstrip-img.is-mic-hanging  { max-width: 148px; max-height: 128px; margin-block-start: -12px; }
+.edio-catstrip-slide .edio-catstrip-img.is-headphones   { max-width: 124px; max-height: 118px; margin-block-start: -4px; }
+.edio-catstrip-slide .edio-catstrip-img.is-mic-standing { max-width: 82px;  max-height: 128px; margin-block-end: -8px; }
+.edio-catstrip-slide .edio-catstrip-img.is-iem          { max-width: 132px; max-height: 118px; margin-block-end: -8px; }
 
 @media (prefers-reduced-motion: reduce) {
   .edio-catstrip-card, .edio-catstrip-img { transition: none; }
 }
 `;
 
+const ANCHOR: Record<Variant, "top" | "bottom" | "center"> = {
+  "mic-hanging": "top",
+  "headphones": "top",
+  "mic-standing": "bottom",
+  "iem": "bottom",
+};
+
 function Card({ card }: { card: Card }) {
   const isHangingMic = card.variant === "mic-hanging";
+  const anchor = ANCHOR[card.variant];
   return (
     <a href={card.href} className="edio-catstrip-card" aria-label={card.title}>
       <div className="edio-catstrip-textcell">
         <h3 className={`edio-catstrip-title${isHangingMic ? " is-nowrap" : ""}`}>{card.title}</h3>
       </div>
-      <div className="edio-catstrip-imgcell">
+      <div className={`edio-catstrip-imgcell is-anchor-${anchor}`}>
         <img
           src={card.image}
           alt=""
