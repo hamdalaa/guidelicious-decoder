@@ -71,10 +71,10 @@ export function HeroCard() {
               loading="eager"
               fetchPriority="high"
             />
-            {/* Top scrim for headline legibility */}
+            {/* Soft top scrim — subtle, image stays visible */}
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-x-0 top-0 h-[45%] bg-gradient-to-b from-edio-cream/85 via-edio-cream/45 to-transparent"
+              className="pointer-events-none absolute inset-x-0 top-0 h-[38%] bg-gradient-to-b from-edio-cream/55 via-edio-cream/15 to-transparent"
             />
             {/* Bottom scrim for buttons */}
             <div
