@@ -125,27 +125,49 @@ const CSS = `
   font-size: clamp(18px, 1.15vw, 20px);
 }
 
-/* Image */
+/* Image cell — anchor per-variant */
 .edio-catstrip-imgcell {
   width: 100%;
   height: 112px;
   display: flex;
-  align-items: center;
   justify-content: center;
   overflow: hidden;
+  position: relative;
 }
+.edio-catstrip-imgcell.is-anchor-top    { align-items: flex-start; }
+.edio-catstrip-imgcell.is-anchor-bottom { align-items: flex-end; }
+.edio-catstrip-imgcell.is-anchor-center { align-items: center; }
+
 .edio-catstrip-img {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-height: 100%;
   object-fit: contain;
-  object-position: center;
   transition: transform 200ms ease;
+  will-change: transform;
 }
-.edio-catstrip-img.is-mic-hanging { max-width: 155px; max-height: 105px; }
-.edio-catstrip-img.is-headphones  { max-width: 112px; max-height: 105px; }
-.edio-catstrip-img.is-mic-standing{ max-width: 76px;  max-height: 112px; }
-.edio-catstrip-img.is-iem         { max-width: 122px; max-height: 102px; }
+/* Per-variant sizes + edge-connect offsets to strip transparent PNG padding */
+.edio-catstrip-img.is-mic-hanging {
+  max-width: 155px; max-height: 118px;
+  object-position: center top;
+  margin-block-start: -10px; /* stand enters from top edge */
+}
+.edio-catstrip-img.is-headphones {
+  max-width: 118px; max-height: 110px;
+  object-position: center top;
+  margin-block-start: -4px;
+}
+.edio-catstrip-img.is-mic-standing {
+  max-width: 78px; max-height: 118px;
+  object-position: center bottom;
+  margin-block-end: -6px; /* base rests on bottom edge */
+}
+.edio-catstrip-img.is-iem {
+  max-width: 126px; max-height: 110px;
+  object-position: center bottom;
+  margin-block-end: -6px; /* cables trail to bottom */
+}
 
 /* Mobile carousel */
 .edio-catstrip-carousel-wrap {
