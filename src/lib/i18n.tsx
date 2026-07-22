@@ -15,14 +15,15 @@ export const dict = {
   "nav.audioEquipment": { en: "Audio Equipment", ar: "معدات صوتية" },
   "nav.brands": { en: "Brands", ar: "العلامات" },
 
-  "hero.eyebrow": { en: "Curated Audio", ar: "صوتيات مختارة" },
+  "hero.eyebrow": { en: "CURATED AUDIO", ar: "صوتيات مختارة" },
   "hero.headline": { en: "Hear the Difference", ar: "اسمع الفرق" },
   "hero.tagline": {
-    en: "Discover hand-picked audio gear for a clearer, richer experience.",
-    ar: "اكتشف أجهزة صوتية مختارة بعناية لتجربة أوضح وأغنى.",
+    en: "Hand-picked audio gear for a clearer, richer experience.",
+    ar: "أجهزة صوتية مختارة لتجربة أوضح وأغنى.",
   },
-  "hero.cta.explore": { en: "Shop now", ar: "تسوق الآن" },
-  "hero.cta.shopAudio": { en: "Browse categories", ar: "تصفح الفئات" },
+  "hero.cta.explore": { en: "Explore", ar: "استكشف" },
+  "hero.cta.shopAudio": { en: "Shop Audio", ar: "تسوّق الصوتيات" },
+
 
   "categories.title": { en: "Shop by category", ar: "تسوق حسب الفئة" },
 
