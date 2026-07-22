@@ -208,8 +208,11 @@ const CSS = `
   padding-block: 14px;
 }
 .edio-catstrip-slide .edio-catstrip-title { font-size: 19px; white-space: normal; }
-.edio-catstrip-slide .edio-catstrip-imgcell { height: 118px; }
-.edio-catstrip-slide .edio-catstrip-img.is-mic-hanging { max-width: 140px; max-height: 100px; }
+.edio-catstrip-slide .edio-catstrip-imgcell { height: 124px; }
+.edio-catstrip-slide .edio-catstrip-img.is-mic-hanging  { max-width: 148px; max-height: 128px; margin-block-start: -12px; }
+.edio-catstrip-slide .edio-catstrip-img.is-headphones   { max-width: 124px; max-height: 118px; margin-block-start: -4px; }
+.edio-catstrip-slide .edio-catstrip-img.is-mic-standing { max-width: 82px;  max-height: 128px; margin-block-end: -8px; }
+.edio-catstrip-slide .edio-catstrip-img.is-iem          { max-width: 132px; max-height: 118px; margin-block-end: -8px; }
 
 @media (prefers-reduced-motion: reduce) {
   .edio-catstrip-card, .edio-catstrip-img { transition: none; }
