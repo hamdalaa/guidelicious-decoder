@@ -177,18 +177,18 @@ export function Header() {
             </a>
           </nav>
 
-          <div className="border-t border-[#F2F2F2] px-6 py-5 space-y-4">
-            <div className="flex items-center justify-between">
-              <LangToggle direction="up" />
-              <CurrencyToggle direction="up" />
-            </div>
-            <div className="flex items-center gap-2">
+          <div className="border-t border-[#F2F2F2] px-6 py-5">
+            <div className="flex items-center gap-1 pb-4">
               <button type="button" aria-label="Search" className={ICON_BTN}>
                 <Search className="h-[22px] w-[22px]" strokeWidth={1.75} />
               </button>
               <button type="button" aria-label="Account" className={ICON_BTN}>
                 <User className="h-[22px] w-[22px]" strokeWidth={1.75} />
               </button>
+            </div>
+            <div className="space-y-3 border-t border-[#F2F2F2] pt-4">
+              <LangToggle variant="row" />
+              <CurrencyToggle variant="row" />
             </div>
           </div>
         </aside>
