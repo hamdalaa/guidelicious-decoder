@@ -230,7 +230,7 @@ export function DesktopSelector({
                     close(true);
                   }}
                   className={cn(
-                    "grid h-11 w-full grid-cols-[36px_1fr_20px] items-center gap-2 rounded-xl px-3 text-[14px] font-medium transition-colors duration-150 text-start",
+                    "grid h-11 w-full grid-cols-[36px_1fr_20px] items-center gap-2 rounded-md px-3 text-[14px] font-medium transition-colors duration-150 text-start",
                     active
                       ? "bg-[#EAF4FE] text-[#0F172A]"
                       : "text-[#0F172A] hover:bg-[#F3F5F8]",
