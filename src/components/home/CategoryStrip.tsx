@@ -66,14 +66,15 @@ const CSS = `
   padding-inline: 20px;
   padding-block: 16px;
   background: #ffffff;
-  border: 1px solid rgba(135, 203, 246, 0.5);
+  border: 1px solid rgba(15, 35, 65, 0.14);
   border-radius: 22px;
   overflow: hidden;
   text-decoration: none;
   box-sizing: border-box;
   transform: translateY(0) scale(1);
   transform-origin: center;
-  box-shadow: 0 0 0 rgba(9, 10, 50, 0);
+  box-shadow: none;
+  outline: none;
   transition:
     transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
     box-shadow 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
@@ -91,14 +92,14 @@ const CSS = `
 @media (hover: hover) and (pointer: fine) {
   .edio-catstrip-card:hover {
     transform: translateY(-2px);
-    border-color: rgba(135, 203, 246, 0.75);
-    background-color: #fdfeff;
-    box-shadow: 0 10px 28px rgba(9, 10, 50, 0.07);
+    border-color: rgba(15, 35, 65, 0.24);
+    background-color: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 35, 65, 0.06);
   }
   .edio-catstrip-card:hover .edio-catstrip-img { transform: none; }
   .edio-catstrip-card:active {
     transform: translateY(0) scale(0.99);
-    box-shadow: 0 4px 14px rgba(9, 10, 50, 0.05);
+    box-shadow: 0 4px 14px rgba(15, 35, 65, 0.05);
     transition-duration: 120ms;
   }
 }
@@ -106,16 +107,17 @@ const CSS = `
   .edio-catstrip-card:hover,
   .edio-catstrip-card:active {
     transform: translateY(0) scale(1);
+    border-color: rgba(15, 35, 65, 0.14);
     box-shadow: none;
   }
   .edio-catstrip-card:hover .edio-catstrip-img,
   .edio-catstrip-card:active .edio-catstrip-img { transform: none; }
-  .edio-catstrip-card:active { border-color: rgba(135, 203, 246, 0.85); }
 }
+.edio-catstrip-card:focus { outline: none; }
 .edio-catstrip-card:focus-visible {
-  outline: 2px solid #87CBF6;
-  outline-offset: 2px;
-  box-shadow: 0 0 0 4px rgba(135, 203, 246, 0.25);
+  outline: 2px solid rgba(80, 160, 220, 0.55);
+  outline-offset: 3px;
+  box-shadow: none;
 }
 .edio-catstrip-card:focus:not(:focus-visible) { outline: none; }
 
