@@ -167,9 +167,10 @@ const CSS = `
   height: auto;
   max-height: 100%;
   object-fit: contain;
-  transition: transform 200ms ease;
+  transform-origin: center;
   will-change: transform;
 }
+
 /* Per-variant sizes + edge-connect offsets to strip transparent PNG padding */
 .edio-catstrip-img.is-mic-hanging {
   max-width: 155px; max-height: 118px;
