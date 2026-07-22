@@ -28,6 +28,7 @@ const CSS = `
   padding-inline: 24px;
   padding-block: 36px;
   box-sizing: border-box;
+  overflow: visible;
 }
 @media (min-width: 768px) {
   .edio-catstrip-section { padding-block: 56px; }
@@ -76,16 +77,24 @@ const CSS = `
   .edio-catstrip-card { height: 140px; min-height: 140px; max-height: 140px; }
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .edio-catstrip-card:hover {
     transform: translateY(-2px);
     border-color: rgba(135, 203, 246, 0.9);
-    box-shadow: 0 8px 22px rgba(10, 35, 70, 0.07);
+    box-shadow: 0 8px 22px rgba(10, 35, 70, 0.08);
   }
   .edio-catstrip-card:hover .edio-catstrip-img { transform: scale(1.02); }
 }
-@media (hover: none) {
-  .edio-catstrip-card:hover, .edio-catstrip-card:active { transform: none; }
+@media (hover: none), (pointer: coarse) {
+  .edio-catstrip-card:hover,
+  .edio-catstrip-card:active { transform: none; }
+  .edio-catstrip-card:hover .edio-catstrip-img,
+  .edio-catstrip-card:active .edio-catstrip-img { transform: none; }
+  .edio-catstrip-card:active { border-color: rgba(135, 203, 246, 0.85); }
+}
+.edio-catstrip-card:focus-visible {
+  outline: 2px solid #87CBF6;
+  outline-offset: -3px;
 }
 
 /* Text */
@@ -139,14 +148,19 @@ const CSS = `
 .edio-catstrip-img.is-iem         { max-width: 122px; max-height: 102px; }
 
 /* Mobile carousel */
-.edio-catstrip-carousel-wrap { display: block; }
+.edio-catstrip-carousel-wrap {
+  display: block;
+  overflow: visible;
+}
 @media (min-width: 768px) { .edio-catstrip-carousel-wrap { display: none; } }
 
 .edio-catstrip-carousel {
   display: flex;
   gap: 12px;
   overflow-x: auto;
+  overflow-y: visible;
   padding-inline: 20px;
+  padding-block: 12px 18px;
   scroll-padding-inline: 20px;
   scroll-snap-type: inline mandatory;
   overscroll-behavior-inline: contain;
