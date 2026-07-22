@@ -95,7 +95,7 @@ export function Header() {
     <header
       ref={headerRef}
       className={cn(
-        "sticky top-0 z-40 bg-edio-cream",
+        "sticky top-0 z-40 bg-transparent",
         "transition-transform duration-[220ms] ease-out will-change-transform motion-reduce:transition-none",
         hidden ? "-translate-y-full" : "translate-y-0",
       )}
