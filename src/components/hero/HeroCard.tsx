@@ -71,49 +71,10 @@ export function HeroCard() {
               loading="eager"
               fetchPriority="high"
             />
-            {/* Soft top scrim — subtle, image stays visible */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-x-0 top-0 h-[38%] bg-gradient-to-b from-edio-cream/55 via-edio-cream/15 to-transparent"
-            />
-            {/* Bottom scrim for buttons */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-x-0 bottom-0 h-[42%] bg-gradient-to-t from-edio-navy/70 via-edio-navy/25 to-transparent"
-            />
-
-            {/* Overlay content */}
-            <div className="relative z-10 flex h-full flex-col justify-between p-6">
-              <div>
-                <h1
-                  className="font-semibold tracking-tight text-edio-navy"
-                  style={{ fontSize: "clamp(2rem, 9vw, 2.75rem)", lineHeight: 1.06 }}
-                >
-                  {t("hero.headline")}
-                </h1>
-                <p className="mt-3 max-w-[28ch] text-[15px] leading-[1.5] text-edio-navy/80">
-                  {t("hero.tagline")}
-                </p>
-              </div>
-
-              <div className="flex w-full flex-col gap-3">
-                <a
-                  href="#shop"
-                  className="inline-flex h-[50px] w-full items-center justify-center rounded-[10px] bg-edio-navy px-5 text-[15px] font-semibold leading-none text-white active:opacity-95"
-                >
-                  {t("hero.cta.explore")}
-                </a>
-                <a
-                  href="#audio"
-                  className="inline-flex h-[50px] w-full items-center justify-center rounded-[10px] border-2 border-white/90 bg-white/10 px-5 text-[15px] font-semibold leading-none text-white backdrop-blur-md active:opacity-95"
-                >
-                  {t("hero.cta.shopAudio")}
-                </a>
-              </div>
-            </div>
           </div>
         </div>
       </div>
+
     </section>
   );
 }
