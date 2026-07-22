@@ -3,19 +3,22 @@ import microphoneAsset from "@/assets/cat-microphone.png.asset.json";
 import iemAsset from "@/assets/cat-iem.png.asset.json";
 import micAtAsset from "@/assets/cat-mic-at.png.asset.json";
 
+type Variant = "mic" | "headphones" | "iem";
+
 type Card = {
   title: string;
   href: string;
   image: string;
   alt: string;
+  variant: Variant;
 };
 
 // RTL reading order
 const CARDS: Card[] = [
-  { title: "الميكروفونات", href: "#microphones", image: microphoneAsset.url, alt: "" },
-  { title: "سماعات الرأس", href: "#headphones", image: headphonesAsset.url, alt: "" },
-  { title: "مايكات", href: "#mics", image: micAtAsset.url, alt: "" },
-  { title: "سماعات داخل الأذن", href: "#iem", image: iemAsset.url, alt: "" },
+  { title: "الميكروفونات", href: "#microphones", image: microphoneAsset.url, alt: "", variant: "mic" },
+  { title: "سماعات الرأس", href: "#headphones", image: headphonesAsset.url, alt: "", variant: "headphones" },
+  { title: "مايكات", href: "#mics", image: micAtAsset.url, alt: "", variant: "mic" },
+  { title: "سماعات داخل الأذن", href: "#iem", image: iemAsset.url, alt: "", variant: "iem" },
 ];
 
 // Isolated styles — scoped to `.edio-cat-*` so nothing bleeds in from banner/hero CSS.
@@ -50,10 +53,11 @@ const SCOPED_CSS = `
 
 .edio-cat-card {
   display: grid;
-  grid-template-columns: 1fr 120px;
+  grid-template-columns: 44% 56%;
   align-items: stretch;
-  height: 140px;
+  height: 156px;
   width: 100%;
+  padding: 12px;
   background: #ffffff;
   border: 1px solid rgba(135, 203, 246, 0.45);
   border-radius: 22px;
@@ -61,50 +65,57 @@ const SCOPED_CSS = `
   text-decoration: none;
   transition: transform 200ms ease-out, border-color 200ms ease-out, box-shadow 200ms ease-out;
 }
-@media (min-width: 1280px) { .edio-cat-card { height: 148px; } }
-@media (max-width: 767px) { .edio-cat-card { height: 134px; grid-template-columns: 1fr 108px; } }
+@media (min-width: 1280px) { .edio-cat-card { height: 164px; } }
+@media (min-width: 768px) and (max-width: 1023px) { .edio-cat-card { height: 148px; } }
+@media (max-width: 767px) { .edio-cat-card { height: 146px; padding: 10px; } }
 
 @media (hover: hover) {
-  .edio-cat-card:hover { transform: translateY(-2px); border-color: rgba(9,10,50,0.28); box-shadow: 0 8px 22px -18px rgba(9,10,50,0.30); }
+  .edio-cat-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(9, 10, 50, 0.22);
+    box-shadow: 0 6px 18px -14px rgba(9, 10, 50, 0.25);
+  }
   .edio-cat-card:hover .edio-cat-img { transform: scale(1.02); }
 }
 
+/* Image cell */
 .edio-cat-img-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px;
+  padding-inline: 4px;
   min-width: 0;
   overflow: hidden;
 }
 .edio-cat-img {
   display: block;
-  width: 100%;
   height: 100%;
-  max-width: 100px;
-  max-height: 108px;
+  width: auto;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
   object-position: center;
   transition: transform 220ms ease-out;
 }
-@media (max-width: 767px) {
-  .edio-cat-img { max-width: 88px; max-height: 96px; }
-  .edio-cat-img-wrap { padding: 10px; }
-}
+/* Per-product tuning so silhouettes read balanced despite different shapes */
+.edio-cat-img.is-mic { max-height: 92%; max-width: 92%; }
+.edio-cat-img.is-headphones { max-height: 80%; max-width: 88%; }
+.edio-cat-img.is-iem { max-height: 84%; max-width: 90%; }
 
+/* Text cell */
 .edio-cat-text {
   display: flex;
   align-items: center;
-  padding: 16px 20px;
+  padding: 6px 14px;
   min-width: 0;
 }
 .edio-cat-title {
   margin: 0;
   color: #090A32;
   font-weight: 600;
-  line-height: 1.25;
+  line-height: 1.3;
   text-align: start;
-  font-size: clamp(14px, 1.05vw, 17px);
+  font-size: clamp(17px, 1.35vw, 20px);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -112,8 +123,8 @@ const SCOPED_CSS = `
   word-break: break-word;
 }
 @media (max-width: 767px) {
-  .edio-cat-text { padding: 14px 16px; }
-  .edio-cat-title { font-size: 14px; }
+  .edio-cat-text { padding: 6px 12px; }
+  .edio-cat-title { font-size: 17px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -123,7 +134,6 @@ const SCOPED_CSS = `
 }
 `;
 
-
 function CategoryCard({ card }: { card: Card }) {
   return (
     <a href={card.href} className="edio-cat-card" aria-label={card.title}>
@@ -132,7 +142,12 @@ function CategoryCard({ card }: { card: Card }) {
         <h3 className="edio-cat-title">{card.title}</h3>
       </div>
       <div className="edio-cat-img-wrap">
-        <img src={card.image} alt={card.alt} loading="lazy" className="edio-cat-img" />
+        <img
+          src={card.image}
+          alt={card.alt}
+          loading="lazy"
+          className={`edio-cat-img is-${card.variant}`}
+        />
       </div>
     </a>
   );
