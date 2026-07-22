@@ -59,7 +59,9 @@ export function HeroCard() {
           <img
             src={heroImg.url}
             alt=""
-            className="absolute inset-0 h-full w-full object-cover object-[50%_100%]"
+            className="absolute inset-0 h-full w-full object-cover"
+            style={{ objectPosition: "50% 92%" }}
+
             loading="eager"
             fetchPriority="high"
           />
