@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Search, User, ShoppingBag, Menu, X } from "lucide-react";
 import { EdioLogo } from "@/components/EdioLogo";
@@ -23,6 +23,8 @@ const ICON_BTN =
 export function Header() {
   const { t } = useI18n();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const headerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -33,8 +35,58 @@ export function Header() {
     };
   }, [menuOpen]);
 
+  useEffect(() => {
+    const reduce =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
+    const THRESHOLD = 8;
+    const TOP_ZONE = 80;
+    let lastY =
+      typeof window !== "undefined" ? window.scrollY || 0 : 0;
+    let ticking = false;
+
+    const update = () => {
+      ticking = false;
+      const y = window.scrollY || 0;
+      const delta = y - lastY;
+
+      // Lock visible when menu open, near top, or any header dropdown open.
+      const dropdownOpen =
+        !!headerRef.current?.querySelector('[aria-expanded="true"]');
+      if (menuOpen || dropdownOpen || y < TOP_ZONE) {
+        setHidden(false);
+        lastY = y;
+        return;
+      }
+
+      if (Math.abs(delta) < THRESHOLD) return;
+
+      if (delta > 0) setHidden(reduce ? false : true);
+      else setHidden(false);
+
+      lastY = y;
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [menuOpen]);
+
   return (
-    <header className="sticky top-0 z-40 border-b border-[#F2F2F2] bg-white">
+    <header
+      ref={headerRef}
+      className={cn(
+        "sticky top-0 z-40 border-b border-[#F2F2F2] bg-white",
+        "transition-transform duration-[220ms] ease-out will-change-transform motion-reduce:transition-none",
+        hidden ? "-translate-y-full" : "translate-y-0",
+      )}
+    >
       {/* Desktop */}
       <div className="relative mx-auto hidden h-[92px] max-w-[1440px] items-center px-8 lg:flex xl:px-12">
         <Link to="/" aria-label="Edio home" className="shrink-0">
