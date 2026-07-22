@@ -133,28 +133,25 @@ const CSS = `
   font-weight: 600;
   line-height: 1.35;
   text-align: start;
-  font-size: clamp(18px, 1.25vw, 23px);
+  font-size: clamp(16px, 1.05vw, 19px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   word-break: normal;
   overflow-wrap: normal;
   hyphens: none;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
-/* Keep "الميكروفونات" on one line on desktop */
-.edio-catstrip-title.is-nowrap {
-  white-space: nowrap;
-  font-size: clamp(18px, 1.15vw, 20px);
-}
+/* mobile carousel allows wrap */
+.edio-catstrip-title.is-nowrap { white-space: nowrap; }
 
-/* Image cell — anchor per-variant */
+/* Image cell — fills full card height so anchoring hits the outer border */
 .edio-catstrip-imgcell {
   width: 100%;
-  height: 112px;
+  align-self: stretch;
+  height: 100%;
   display: flex;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
 }
 .edio-catstrip-imgcell.is-anchor-top    { align-items: flex-start; }
@@ -171,27 +168,28 @@ const CSS = `
   will-change: transform;
 }
 
-/* Per-variant sizes + edge-connect offsets to strip transparent PNG padding */
+/* Per-variant sizes + edge-connect offsets (card padding-block is 16px, so -16px reaches border) */
 .edio-catstrip-img.is-mic-hanging {
-  max-width: 155px; max-height: 118px;
+  max-width: 155px; max-height: 130px;
   object-position: center top;
-  margin-block-start: -10px; /* stand enters from top edge */
+  margin-block-start: -16px;
 }
 .edio-catstrip-img.is-headphones {
-  max-width: 118px; max-height: 110px;
+  max-width: 122px; max-height: 122px;
   object-position: center top;
-  margin-block-start: -4px;
+  margin-block-start: -14px;
 }
 .edio-catstrip-img.is-mic-standing {
-  max-width: 78px; max-height: 118px;
+  max-width: 82px; max-height: 132px;
   object-position: center bottom;
-  margin-block-end: -6px; /* base rests on bottom edge */
+  margin-block-end: -16px;
 }
 .edio-catstrip-img.is-iem {
-  max-width: 126px; max-height: 110px;
+  max-width: 130px; max-height: 122px;
   object-position: center bottom;
-  margin-block-end: -6px; /* cables trail to bottom */
+  margin-block-end: -14px;
 }
+
 
 /* Mobile carousel */
 .edio-catstrip-carousel-wrap {
