@@ -101,13 +101,13 @@ export function Header() {
       )}
     >
       {/* Desktop */}
-      <div className="relative mx-auto hidden h-[92px] max-w-[1440px] items-center px-8 lg:flex xl:px-12">
+      <div className="mx-auto hidden h-[92px] max-w-[1440px] items-center gap-6 px-8 lg:flex xl:px-12">
         <Link to="/" aria-label="Edio home" className="shrink-0">
           <EdioLogo size="sm" pill={false} />
         </Link>
 
-        <nav className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-center">
-          <ul className="pointer-events-auto flex items-center gap-11 xl:gap-12 text-[15px] font-medium leading-none text-[#232323]">
+        <nav className="flex min-w-0 flex-1 justify-center">
+          <ul className="flex items-center gap-8 xl:gap-11 text-[15px] font-medium leading-none text-[#232323]">
             {NAV.map((item) => (
               <li key={item.key}>
                 <a href={item.href} className="transition-opacity duration-150 hover:opacity-60">
@@ -126,7 +126,8 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="ms-auto flex items-center gap-[18px]">
+        <div className="flex shrink-0 items-center gap-[18px]">
+
           <LangToggle />
           <CurrencyToggle />
           <div className="flex items-center gap-[6px] ms-1">
