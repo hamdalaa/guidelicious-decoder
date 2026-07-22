@@ -28,6 +28,7 @@ const CSS = `
   padding-inline: 24px;
   padding-block: 36px;
   box-sizing: border-box;
+  overflow: visible;
 }
 @media (min-width: 768px) {
   .edio-catstrip-section { padding-block: 56px; }
