@@ -31,7 +31,7 @@ function Index() {
       <Header />
       <main>
         <HeroCard />
-        <CategoryStrip />
+        <CategoryCards />
       </main>
       <Footer />
     </div>
