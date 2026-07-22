@@ -204,8 +204,11 @@
   width: 100%;
   background-color: currentColor;
   transform: scaleX(0);
-  transform-origin: inline-start;
+  transform-origin: left center;
   transition: transform 260ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+[dir="rtl"] .edio-nav-link > span::after {
+  transform-origin: right center;
 }
 .edio-nav-link:hover > span::after,
 .edio-nav-link:focus-visible > span::after {
