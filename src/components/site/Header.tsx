@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Search, User, ShoppingBag, Menu, X } from "lucide-react";
 import { EdioLogo } from "@/components/EdioLogo";
