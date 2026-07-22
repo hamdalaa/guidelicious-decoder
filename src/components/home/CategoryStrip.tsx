@@ -71,31 +71,54 @@ const CSS = `
   overflow: hidden;
   text-decoration: none;
   box-sizing: border-box;
-  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+  transform: translateY(0) scale(1);
+  transform-origin: center;
+  box-shadow: 0 0 0 rgba(9, 10, 50, 0);
+  transition:
+    transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 @media (min-width: 768px) and (max-width: 1199px) {
   .edio-catstrip-card { height: 140px; min-height: 140px; max-height: 140px; }
 }
 
+.edio-catstrip-img {
+  transition: transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
 @media (hover: hover) and (pointer: fine) {
   .edio-catstrip-card:hover {
-    transform: translateY(-2px);
-    border-color: rgba(135, 203, 246, 0.9);
-    box-shadow: 0 8px 22px rgba(10, 35, 70, 0.08);
+    transform: translateY(-2px) scale(1.01);
+    border-color: rgba(135, 203, 246, 0.75);
+    background-color: #fdfeff;
+    box-shadow: 0 10px 28px rgba(9, 10, 50, 0.07);
   }
   .edio-catstrip-card:hover .edio-catstrip-img { transform: scale(1.02); }
+  .edio-catstrip-card:active {
+    transform: translateY(0) scale(0.99);
+    box-shadow: 0 4px 14px rgba(9, 10, 50, 0.05);
+    transition-duration: 120ms;
+  }
 }
 @media (hover: none), (pointer: coarse) {
   .edio-catstrip-card:hover,
-  .edio-catstrip-card:active { transform: none; }
+  .edio-catstrip-card:active {
+    transform: translateY(0) scale(1);
+    box-shadow: none;
+  }
   .edio-catstrip-card:hover .edio-catstrip-img,
   .edio-catstrip-card:active .edio-catstrip-img { transform: none; }
   .edio-catstrip-card:active { border-color: rgba(135, 203, 246, 0.85); }
 }
 .edio-catstrip-card:focus-visible {
   outline: 2px solid #87CBF6;
-  outline-offset: -3px;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(135, 203, 246, 0.25);
 }
+.edio-catstrip-card:focus:not(:focus-visible) { outline: none; }
+
 
 /* Text */
 .edio-catstrip-textcell {
@@ -144,9 +167,10 @@ const CSS = `
   height: auto;
   max-height: 100%;
   object-fit: contain;
-  transition: transform 200ms ease;
+  transform-origin: center;
   will-change: transform;
 }
+
 /* Per-variant sizes + edge-connect offsets to strip transparent PNG padding */
 .edio-catstrip-img.is-mic-hanging {
   max-width: 155px; max-height: 118px;
@@ -215,8 +239,16 @@ const CSS = `
 .edio-catstrip-slide .edio-catstrip-img.is-iem          { max-width: 132px; max-height: 118px; margin-block-end: -8px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .edio-catstrip-card, .edio-catstrip-img { transition: none; }
+  .edio-catstrip-card,
+  .edio-catstrip-card:hover,
+  .edio-catstrip-card:active,
+  .edio-catstrip-img,
+  .edio-catstrip-card:hover .edio-catstrip-img {
+    transition: background-color 200ms ease, border-color 200ms ease;
+    transform: none;
+  }
 }
+
 `;
 
 const ANCHOR: Record<Variant, "top" | "bottom" | "center"> = {
