@@ -22,6 +22,12 @@ export function HeroCard() {
             aria-hidden
             className="pointer-events-none absolute inset-y-0 start-0 w-[58%] bg-gradient-to-r from-edio-cream/85 via-edio-cream/50 to-transparent rtl:bg-gradient-to-l"
           />
+          {/* Frosted edge vignette */}
+          <div aria-hidden className="pointer-events-none absolute inset-0">
+            <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-edio-cream/40 to-transparent backdrop-blur-md [mask-image:linear-gradient(to_bottom,black,transparent)]" />
+            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-edio-cream/40 to-transparent backdrop-blur-md [mask-image:linear-gradient(to_top,black,transparent)]" />
+            <div className="absolute inset-y-0 end-0 w-16 bg-gradient-to-l from-edio-cream/35 to-transparent backdrop-blur-md [mask-image:linear-gradient(to_left,black,transparent)]" />
+          </div>
           {/* Copy block */}
           <div className="relative z-10 flex h-full items-center">
             <div className="w-full max-w-[560px] px-10 py-14 lg:px-14 lg:py-16 xl:px-16">
@@ -43,7 +49,7 @@ export function HeroCard() {
                 </a>
                 <a
                   href="#audio"
-                  className="edio-btn-secondary inline-flex h-[46px] items-center rounded-[10px] border-[1.5px] border-edio-navy/85 px-7 text-[14px] font-medium leading-none text-edio-navy active:opacity-95"
+                  className="edio-btn-secondary inline-flex h-[46px] items-center rounded-[10px] border-2 border-edio-navy/85 bg-white/25 px-7 text-[14px] font-medium leading-none text-edio-navy backdrop-blur-md active:opacity-95"
                 >
                   {t("hero.cta.shopAudio")}
                 </a>
@@ -65,10 +71,10 @@ export function HeroCard() {
               loading="eager"
               fetchPriority="high"
             />
-            {/* Top scrim for headline legibility */}
+            {/* Soft top scrim — subtle, image stays visible */}
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-x-0 top-0 h-[45%] bg-gradient-to-b from-edio-cream/85 via-edio-cream/45 to-transparent"
+              className="pointer-events-none absolute inset-x-0 top-0 h-[38%] bg-gradient-to-b from-edio-cream/55 via-edio-cream/15 to-transparent"
             />
             {/* Bottom scrim for buttons */}
             <div
