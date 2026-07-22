@@ -76,9 +76,9 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Edio typography tokens */
+  /* Edio typography tokens — Neoris only for both languages */
   --font-en-main: "TT Neoris Pro", system-ui, sans-serif;
-  --font-ar-main: "IBM Plex Sans Arabic", "TT Neoris Pro", system-ui, sans-serif;
+  --font-ar-main: "TT Neoris Pro", system-ui, sans-serif;
   --font-sans: var(--font-en-main);
   --font-display: var(--font-en-main);
 
@@ -137,7 +137,6 @@
     border-color: var(--color-border);
   }
 
-  /* Hide scrollbars globally while keeping scroll behavior */
   html,
   body {
     scrollbar-width: none;
@@ -152,7 +151,6 @@
   html {
     font-family: var(--font-en-main);
   }
-
   html[lang="ar"] {
     font-family: var(--font-ar-main);
   }
@@ -165,18 +163,15 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Content-level RTL scoping — the html <dir> stays ltr so the header
-     controls never mirror. Elements marked [dir="rtl"] flip locally. */
-  [dir="rtl"] {
-    direction: rtl;
+  button,
+  input,
+  select,
+  textarea {
+    font-family: inherit;
   }
 }
 
-@keyframes edio-lang-swap {
-  0% { opacity: 0.4; transform: translateY(4px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-.edio-lang-swap {
-  animation: edio-lang-swap 380ms cubic-bezier(0.22, 1, 0.36, 1);
+/* Flip only directional glyphs (arrows) in RTL */
+[dir="rtl"] .rtl-flip {
+  transform: scaleX(-1);
 }

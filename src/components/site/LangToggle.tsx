@@ -1,19 +1,15 @@
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 
-/**
- * Minimal EN | AR toggle — plain text, navy underline on the active label.
- */
 export function LangToggle({ className }: { className?: string }) {
   const { lang, setLang } = useI18n();
 
   return (
     <div
-      dir="ltr"
       role="group"
       aria-label="Language"
       className={cn(
-        "inline-flex items-center gap-1 text-[12px] font-semibold uppercase tracking-wider select-none",
+        "inline-flex h-9 items-center gap-1.5 text-[12px] font-semibold uppercase tracking-wider select-none",
         className,
       )}
     >
@@ -26,15 +22,17 @@ export function LangToggle({ className }: { className?: string }) {
               onClick={() => setLang(code)}
               aria-pressed={active}
               className={cn(
-                "px-1.5 py-1 transition-colors",
+                "px-1 py-1 transition-colors",
                 active
-                  ? "text-edio-navy underline underline-offset-4 decoration-2"
-                  : "text-edio-navy/45 hover:text-edio-navy",
+                  ? "text-edio-navy"
+                  : "text-edio-navy/40 hover:text-edio-navy/70",
               )}
             >
               {code}
             </button>
-            {i === 0 && <span aria-hidden className="text-edio-navy/25">/</span>}
+            {i === 0 && (
+              <span aria-hidden className="text-edio-navy/25">·</span>
+            )}
           </span>
         );
       })}

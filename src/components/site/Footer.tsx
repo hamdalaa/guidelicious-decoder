@@ -21,15 +21,15 @@ const SUPPORT: { key: TKey; href: string }[] = [
 export function Footer() {
   const { t } = useI18n();
   return (
-    <footer className="px-3 pb-6 pt-16 sm:px-6">
-      <div className="mx-auto max-w-7xl rounded-[1.75rem] bg-white/70 p-6 sm:rounded-[2rem] sm:p-10">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+    <footer className="px-5 pb-6 pt-10 sm:px-8 sm:pt-12">
+      <div className="mx-auto max-w-7xl rounded-2xl bg-white/70 p-5 sm:p-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div className="min-w-0">
             <EdioLogo size="sm" />
-            <p className="mt-4 max-w-xs text-sm text-edio-navy/70">
+            <p className="mt-3 max-w-xs text-sm text-edio-navy/70">
               {t("footer.tagline")}
             </p>
-            <div className="mt-5 flex items-center gap-2">
+            <div className="mt-4 flex items-center gap-2">
               <a
                 href="https://t.me/edio_iq"
                 target="_blank"
@@ -55,7 +55,7 @@ export function Footer() {
             <h4 className="text-xs font-medium uppercase tracking-[0.15em] text-edio-navy/50">
               {t("footer.shop")}
             </h4>
-            <ul className="mt-4 space-y-2.5 text-sm text-edio-navy/80">
+            <ul className="mt-3 space-y-2 text-sm text-edio-navy/80">
               {SHOP.map((l) => (
                 <li key={l.key}>
                   <a href={l.href} className="transition-colors hover:text-edio-navy">
@@ -70,7 +70,7 @@ export function Footer() {
             <h4 className="text-xs font-medium uppercase tracking-[0.15em] text-edio-navy/50">
               {t("footer.support")}
             </h4>
-            <ul className="mt-4 space-y-2.5 text-sm text-edio-navy/80">
+            <ul className="mt-3 space-y-2 text-sm text-edio-navy/80">
               {SUPPORT.map((l) => (
                 <li key={l.key}>
                   <a href={l.href} className="transition-colors hover:text-edio-navy">
@@ -82,7 +82,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-edio-navy/10 pt-6 text-xs text-edio-navy/60">
+        <div className="mt-6 border-t border-edio-navy/10 pt-4 text-xs text-edio-navy/60">
           <p>© {new Date().getFullYear()} Edio</p>
         </div>
       </div>
