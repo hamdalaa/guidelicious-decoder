@@ -36,13 +36,13 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-[#F2F2F2] bg-white">
       {/* Desktop */}
-      <div className="mx-auto hidden h-[92px] max-w-[1440px] grid-cols-[auto_1fr_auto] items-center gap-10 px-10 lg:grid xl:px-14">
+      <div className="relative mx-auto hidden h-[92px] max-w-[1440px] items-center px-8 lg:flex xl:px-12">
         <Link to="/" aria-label="Edio home" className="shrink-0">
           <EdioLogo size="sm" pill={false} />
         </Link>
 
-        <nav className="flex justify-center">
-          <ul className="flex items-center gap-11 xl:gap-12 text-[15px] font-medium leading-none text-[#232323]">
+        <nav className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-center">
+          <ul className="pointer-events-auto flex items-center gap-11 xl:gap-12 text-[15px] font-medium leading-none text-[#232323]">
             {NAV.map((item) => (
               <li key={item.key}>
                 <a
@@ -64,9 +64,9 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-[22px]">
+        <div className="ms-auto flex items-center gap-[22px]">
           <LangToggle />
-          <CurrencyToggle />
+          <CurrencyToggle direction="down" />
           <div className="flex items-center gap-[10px]">
             <button type="button" aria-label="Search" className={ICON_BTN}>
               <Search className="h-[22px] w-[22px]" strokeWidth={1.75} />
@@ -180,7 +180,7 @@ export function Header() {
           <div className="border-t border-[#F2F2F2] px-6 py-5 space-y-4">
             <div className="flex items-center justify-between">
               <LangToggle />
-              <CurrencyToggle />
+              <CurrencyToggle direction="up" />
             </div>
             <div className="flex items-center gap-2">
               <button type="button" aria-label="Search" className={ICON_BTN}>
