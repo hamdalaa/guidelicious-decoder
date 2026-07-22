@@ -59,14 +59,15 @@ export function HeroCard() {
           <img
             src={heroImg.url}
             alt=""
-            className="absolute inset-0 h-full w-full object-cover object-[55%_78%]"
+            className="absolute inset-0 h-full w-full object-cover object-[50%_100%]"
             loading="eager"
             fetchPriority="high"
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-x-0 top-0 h-[58%] bg-gradient-to-b from-edio-cream/95 via-edio-cream/70 to-transparent"
+            className="pointer-events-none absolute inset-x-0 top-0 h-[55%] bg-gradient-to-b from-edio-cream via-edio-cream/80 to-transparent"
           />
+
           <div className="absolute inset-x-0 top-0 z-10 px-6 pb-10 pt-7">
             <p className="text-[11px] font-semibold tracking-[0.22em] text-edio-navy/70">
               {t("hero.eyebrow")}
