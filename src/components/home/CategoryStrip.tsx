@@ -233,8 +233,12 @@ const ANCHOR: Record<Variant, "top" | "bottom" | "center"> = {
 };
 
 function Card({ card }: { card: Card }) {
-  const isHangingMic = card.variant === "mic-hanging";
   const anchor = ANCHOR[card.variant];
+  return (
+    <a href={card.href} className="edio-catstrip-card" aria-label={card.title}>
+      <div className="edio-catstrip-textcell">
+        <h3 className="edio-catstrip-title">{card.title}</h3>
+      </div>
   return (
     <a href={card.href} className="edio-catstrip-card" aria-label={card.title}>
       <div className="edio-catstrip-textcell">
