@@ -3,7 +3,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { HeroCard } from "@/components/hero/HeroCard";
 import { CategoryStrip } from "@/components/home/CategoryStrip";
-import { useI18n } from "@/lib/i18n";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -26,11 +26,10 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const { dir } = useI18n();
   return (
     <div className="min-h-screen bg-edio-cream">
       <Header />
-      <main dir={dir}>
+      <main>
         <HeroCard />
         <CategoryStrip />
       </main>

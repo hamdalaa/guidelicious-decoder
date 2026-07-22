@@ -32,7 +32,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-edio-navy/5 bg-edio-cream/90 backdrop-blur-md">
-      <div className="mx-auto grid h-18 max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-4 px-5 sm:px-8 lg:h-22" style={{ height: "72px" }}>
+      <div className="mx-auto grid h-[72px] max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-4 px-5 sm:px-8 lg:h-[88px]">
         <Link to="/" aria-label="Edio home" className="shrink-0">
           <EdioLogo size="sm" pill={false} />
         </Link>
