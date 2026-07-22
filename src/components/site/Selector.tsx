@@ -213,7 +213,7 @@ export function DesktopSelector({
               transitionDuration: visible ? "180ms" : "140ms",
               transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
             }}
-            className="z-[100] overflow-hidden rounded-2xl border border-[#ECECEC] bg-[#FDFDFB] p-1 shadow-[0_10px_30px_-12px_rgba(15,23,42,0.18)] motion-reduce:transition-none"
+            className="z-[100] overflow-hidden rounded-lg border border-[#ECECEC] bg-[#FDFDFB] p-1 shadow-[0_10px_30px_-12px_rgba(15,23,42,0.18)] motion-reduce:transition-none"
           >
             {options.map((opt, idx) => {
               const active = opt.value === value;
