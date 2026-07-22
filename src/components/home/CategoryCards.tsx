@@ -41,7 +41,7 @@ const SCOPED_CSS = `
 
 .edio-cat-card {
   display: grid;
-  grid-template-columns: 42% 58%;
+  grid-template-columns: 58% 42%;
   align-items: stretch;
   height: 170px;
   width: 100%;
