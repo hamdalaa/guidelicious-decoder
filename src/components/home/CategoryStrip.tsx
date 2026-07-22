@@ -219,14 +219,22 @@ const CSS = `
 }
 `;
 
+const ANCHOR: Record<Variant, "top" | "bottom" | "center"> = {
+  "mic-hanging": "top",
+  "headphones": "top",
+  "mic-standing": "bottom",
+  "iem": "bottom",
+};
+
 function Card({ card }: { card: Card }) {
   const isHangingMic = card.variant === "mic-hanging";
+  const anchor = ANCHOR[card.variant];
   return (
     <a href={card.href} className="edio-catstrip-card" aria-label={card.title}>
       <div className="edio-catstrip-textcell">
         <h3 className={`edio-catstrip-title${isHangingMic ? " is-nowrap" : ""}`}>{card.title}</h3>
       </div>
-      <div className="edio-catstrip-imgcell">
+      <div className={`edio-catstrip-imgcell is-anchor-${anchor}`}>
         <img
           src={card.image}
           alt=""
