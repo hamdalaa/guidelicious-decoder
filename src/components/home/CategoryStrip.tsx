@@ -239,8 +239,16 @@ const CSS = `
 .edio-catstrip-slide .edio-catstrip-img.is-iem          { max-width: 132px; max-height: 118px; margin-block-end: -8px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .edio-catstrip-card, .edio-catstrip-img { transition: none; }
+  .edio-catstrip-card,
+  .edio-catstrip-card:hover,
+  .edio-catstrip-card:active,
+  .edio-catstrip-img,
+  .edio-catstrip-card:hover .edio-catstrip-img {
+    transition: background-color 200ms ease, border-color 200ms ease;
+    transform: none;
+  }
 }
+
 `;
 
 const ANCHOR: Record<Variant, "top" | "bottom" | "center"> = {
