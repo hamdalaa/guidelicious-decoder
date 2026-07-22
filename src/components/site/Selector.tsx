@@ -213,7 +213,7 @@ export function DesktopSelector({
               transitionDuration: visible ? "180ms" : "140ms",
               transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
             }}
-            className="z-[100] overflow-hidden rounded-2xl border border-[#ECECEC] bg-[#FDFDFB] p-1 shadow-[0_10px_30px_-12px_rgba(15,23,42,0.18)] motion-reduce:transition-none"
+            className="z-[100] overflow-hidden rounded-lg border border-[#ECECEC] bg-[#FDFDFB] p-1 shadow-[0_10px_30px_-12px_rgba(15,23,42,0.18)] motion-reduce:transition-none"
           >
             {options.map((opt, idx) => {
               const active = opt.value === value;
@@ -230,7 +230,7 @@ export function DesktopSelector({
                     close(true);
                   }}
                   className={cn(
-                    "grid h-11 w-full grid-cols-[36px_1fr_20px] items-center gap-2 rounded-xl px-3 text-[14px] font-medium transition-colors duration-150 text-start",
+                    "grid h-11 w-full grid-cols-[36px_1fr_20px] items-center gap-2 rounded-md px-3 text-[14px] font-medium transition-colors duration-150 text-start",
                     active
                       ? "bg-[#EAF4FE] text-[#0F172A]"
                       : "text-[#0F172A] hover:bg-[#F3F5F8]",
