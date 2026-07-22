@@ -132,7 +132,9 @@ const CSS = `
 .edio-catstrip-title {
   margin: 0;
   color: #090A32;
+  font-family: var(--font-ar-main);
   font-weight: 600;
+  font-synthesis-weight: none;
   line-height: 1.35;
   text-align: start;
   font-size: clamp(16px, 1.05vw, 19px);
