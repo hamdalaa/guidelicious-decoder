@@ -110,8 +110,8 @@ export function Header() {
           <ul className="flex items-center gap-8 xl:gap-11 text-[15px] font-medium leading-none text-[#232323]">
             {NAV.map((item) => (
               <li key={item.key}>
-                <a href={item.href} className="transition-opacity duration-150 hover:opacity-60">
-                  {t(item.key)}
+                <a href={item.href} className="edio-nav-link">
+                  <span>{t(item.key)}</span>
                 </a>
               </li>
             ))}
