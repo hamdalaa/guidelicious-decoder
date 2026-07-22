@@ -2,34 +2,41 @@
 @source "../src";
 @import "tw-animate-css";
 
-/* ============ Edio typography — TT Neoris Pro (only) ============ */
+/* ============ Edio typography — Arabic: TT Neoris Pro from provided package ============ */
 @font-face {
   font-family: "TT Neoris Pro";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/__l5e/assets-v1/b5127202-8629-4855-9884-c03012b959ca/TTNeorisPro-VF.woff2") format("woff2-variations");
+}
+@font-face {
+  font-family: "TT Neoris Pro Fallback";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("/__l5e/assets-v1/9b96af74-7aeb-4b24-80bf-7b124e16b17d/TTNeorisPro-Regular.woff2") format("woff2");
+  src: url("/__l5e/assets-v1/2db83509-144a-4a14-8bef-99dff479861b/TTNeorisPro-Regular.woff2") format("woff2");
 }
 @font-face {
-  font-family: "TT Neoris Pro";
+  font-family: "TT Neoris Pro Fallback";
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url("/__l5e/assets-v1/b6d0b9f3-3698-4f9e-8a88-91a918658f6e/TTNeorisPro-Medium.woff2") format("woff2");
+  src: url("/__l5e/assets-v1/7bf97287-176e-41f6-8a2c-edbdb2ef5c5d/TTNeorisPro-Medium.woff2") format("woff2");
 }
 @font-face {
-  font-family: "TT Neoris Pro";
+  font-family: "TT Neoris Pro Fallback";
   font-style: normal;
   font-weight: 600;
   font-display: swap;
-  src: url("/__l5e/assets-v1/d5f68aa0-5995-4512-9c3c-df11d4415883/TTNeorisPro-DemiBold.woff2") format("woff2");
+  src: url("/__l5e/assets-v1/ea70cf34-bb4a-440a-ab26-de369ecfe238/TTNeorisPro-DemiBold.woff2") format("woff2");
 }
 @font-face {
-  font-family: "TT Neoris Pro";
+  font-family: "TT Neoris Pro Fallback";
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url("/__l5e/assets-v1/bafcfe61-3cbd-485e-9ca1-5c7b6faa2e20/TTNeorisPro-Bold.woff2") format("woff2");
+  src: url("/__l5e/assets-v1/125a539a-78b8-460e-85f6-c402cec89f2f/TTNeorisPro-Bold.woff2") format("woff2");
 }
 
 @custom-variant dark (&:is(.dark *));
