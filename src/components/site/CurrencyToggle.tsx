@@ -9,10 +9,30 @@ const OPTIONS: { code: Currency; symbol: string }[] = [
   { code: "IQD", symbol: "د.ع" },
 ];
 
-export function CurrencyToggle({ className }: { className?: string }) {
+interface Props {
+  className?: string;
+  /** Where the panel expands from the trigger. */
+  direction?: "down" | "up";
+}
+
+export function CurrencyToggle({ className, direction = "down" }: Props) {
   const [current, setCurrent] = useState<Currency>("USD");
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+
+  // Mount/unmount with exit animation
+  useEffect(() => {
+    if (open) {
+      setMounted(true);
+      const r = requestAnimationFrame(() => setVisible(true));
+      return () => cancelAnimationFrame(r);
+    }
+    setVisible(false);
+    const t = window.setTimeout(() => setMounted(false), 200);
+    return () => window.clearTimeout(t);
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -28,6 +48,9 @@ export function CurrencyToggle({ className }: { className?: string }) {
     };
   }, [open]);
 
+  const isUp = direction === "up";
+  const translateClosed = isUp ? "translateY(8px)" : "translateY(-8px)";
+
   return (
     <div ref={ref} className={cn("relative inline-block", className)}>
       <button
@@ -40,14 +63,26 @@ export function CurrencyToggle({ className }: { className?: string }) {
       >
         <span>{current}</span>
         <ChevronDown
-          className={cn("h-4 w-4 transition-transform duration-150", open && "rotate-180")}
+          className={cn(
+            "h-4 w-4 transition-transform duration-200",
+            open && "rotate-180",
+          )}
           strokeWidth={1.75}
         />
       </button>
-      {open && (
+      {mounted && (
         <div
           role="listbox"
-          className="absolute top-full end-0 mt-3 min-w-[9rem] rounded-xl border border-[#F2F2F2] bg-white p-1 shadow-[0_8px_28px_-14px_rgba(0,0,0,0.12)] z-50"
+          style={{
+            transform: visible ? "translateY(0) scale(1)" : `${translateClosed} scale(0.98)`,
+            opacity: visible ? 1 : 0,
+            transitionProperty: "opacity, transform",
+            transitionDuration: "200ms",
+            transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+            transformOrigin: isUp ? "bottom right" : "top right",
+            [isUp ? "bottom" : "top"]: "calc(100% + 7px)",
+          }}
+          className="absolute end-0 min-w-[10rem] rounded-[18px] border border-black/[0.06] bg-white p-1.5 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.12)] z-50"
         >
           {OPTIONS.map(({ code, symbol }) => {
             const active = current === code;
@@ -62,14 +97,13 @@ export function CurrencyToggle({ className }: { className?: string }) {
                   setOpen(false);
                 }}
                 className={cn(
-                  "flex w-full items-center justify-between gap-3 rounded-lg px-3 py-2 text-[14px] font-medium transition-colors",
-                  active
-                    ? "bg-[#F7F7F7] text-[#232323]"
-                    : "text-[#232323] hover:bg-[#F7F7F7]",
+                  "flex w-full items-center justify-between gap-6 rounded-[12px] px-3.5 h-[44px] text-[15px] font-medium leading-none text-[#232323] transition-colors duration-150",
+                  "hover:bg-[#F5F5F5]",
+                  active && "bg-[#F5F5F5]",
                 )}
               >
                 <span>{code}</span>
-                <span className="text-[13px] text-[#8A8A8A]">{symbol}</span>
+                <span className="text-[#8A8A8A]">{symbol}</span>
               </button>
             );
           })}
